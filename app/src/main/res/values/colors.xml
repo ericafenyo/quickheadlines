@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Theme-->
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#f5f5f5</color>
+    <color name="colorAccent">#BA68C8</color>
+    <color name="colorSecondaryDark">#00de7a</color>
+
+    <!--Custom-->
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorGrayDark">#616161</color>
+    <color name="colorGrayLight">#9E9E9E</color>
+    <color name="colorFade">#EDFAFB</color>
+    <color name="colorArticleTitle">#555555</color>
+    <color name="colorArticleCaption">#89000000</color>
+    <color name="colorViewBackground">#ccc</color>
+    <color name="colorBookmarkBackground">#f5f5f5</color>
+    <color name="colorPrefViewBackground">#BDBDBD</color>
+    <color name="colorWeatherCardBackground">#259d89</color>
+    <color name="colorSecondaryCenter">#9C27B0</color>
+    <color name="colorSecondary400">#AB47BC</color>
+
+
+</resources>

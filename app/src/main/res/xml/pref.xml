@@ -1,0 +1,79 @@
+<!--
+  Copyright (C) 2018 Eric Afenyo
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:layout="@layout/preferences_category"
+        android:title="@string/pref_category_general">
+        <ListPreference
+            android:defaultValue="@integer/text_size_default_values"
+            android:entries="@array/text_size_values_tile"
+            android:entryValues="@array/text_size_values"
+            android:key="@string/pref_key_article_text_size"
+            android:negativeButtonText="@string/pref_temp_negativeButtonText"
+            android:positiveButtonText="@null"
+            android:title="@string/pref_title_text_size" />
+
+        <ListPreference
+            android:defaultValue="@integer/temperature_units_default_values"
+            android:entries="@array/temperature_units_values_title"
+            android:entryValues="@array/temperature_units_values"
+            android:key="@string/pref_key_temperature_units"
+            android:negativeButtonText="@string/pref_temp_negativeButtonText"
+            android:positiveButtonText="@null"
+            android:title="@string/pref_title_temp_unit" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:layout="@layout/preferences_category"
+        android:title="@string/pref_category_notification">
+
+        <SwitchPreference
+            android:defaultValue="@bool/default_value_enable_notifications"
+            android:key="@string/pref_key_enable_notifications"
+            android:summaryOff="@string/pref_summary_enable_notifications_false"
+            android:summaryOn="@string/pref_summary_enable_notifications_true"
+            android:title="@string/pref_title_enable_notifications" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:layout="@layout/preferences_category"
+        android:title="@string/pref_category_about">
+        <Preference
+            android:summary="@string/pref_summary_licenses"
+            android:title="@string/pref_title_licenses">
+            <intent
+                android:action="com.example.eric.quickheadline.LAUNCH_PREF"
+                android:targetClass="com.example.eric.quickheadline.LicenseActivity"
+                android:targetPackage="com.example.eric.quickheadline" />
+        </Preference>
+        <Preference
+            android:selectable="false"
+            android:summary="@string/pref_summary_description"
+            android:title="@string/pref_title_description" />
+
+        <Preference
+            android:selectable="false"
+            android:summary="@string/pref_summary_credit"
+            android:title="@string/pref_title_credit" />
+
+        <Preference
+            android:selectable="false"
+            android:summary="@string/pref_summary_build_version"
+            android:title="@string/pref_title_build_version" />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,158 @@
+<resources>
+    <!-- App name -->
+    <string name="app_name">Quick Headline</string>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     - Used in Welcome Screen                                                                      -
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <string name="welcome_terms"><p>This app uses the Google Places and Maps APIs. By continuing,
+        you are bound by <xllif.g><a href="https://www.google.com/policies/privacy"> Google Privacy Policy</a></xllif.g>.</p></string>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     - Texts used as action                                                                        -
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <string name="title_action_search">Search</string>
+    <string name="action_share">Share</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_change_location">Change location</string>
+    <string name="action_read_more">Read More</string>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     - Texts used as titles                                                                        -
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <string name="title_settings">Settings</string>
+    <string name="title_home">Home</string>
+    <string name="title_discover">Discover</string>
+    <string name="title_bookmark">Bookmark</string>
+    <string name="title_top_stories">Top Stories</string>
+    <string name="title_share_using">Share</string>
+    <string name="title_web_view" translatable="false">www</string>
+    <string name="title_view_map">Map</string>
+    <string name="label_humidity">Humidity</string>
+    <string name="label_visibility">Visibility</string>
+    <string name="label_pressure">Pressure</string>
+    <string name="label_wind_speed">Wind speed</string>
+    <string name="bookmark_db_name">bookmark.db</string>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     - Texts used to give information                                                                              -
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <string name="error_location_not_supported">OOPS! Your location is currently not supported</string>
+    <string name="error_on_network_call">Failed to sync data: </string>
+    <string name="msg_bookmark_empty">No bookmarks saved</string>
+    <string name="msg_bookmark_added">Added to Bookmarks</string>
+    <string name="error_weather_notification">Error while building notification</string>
+    <string name="search_hint_text">Search for topics,news,…</string>
+    <string name="msg_welcome">Welcome</string>
+    <string name="error_no_internet">No internet connectivity</string>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     - Content Authorities for the Providers                                                       -
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <string name="article_provider_content_authority" translatable="false">com.example.eric.quickheadline.provider.articleprovider</string>
+    <string name="weather_provider_content_authority" translatable="false">com.example.eric.quickheadline.provider.weatherprovider</string>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     - Used for Weather Accessibility purposes                                                     -
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <string name="accessibility_timezone">IANA timezone</string>
+    <string name="accessibility_summary">A human-readable text forecast summary</string>
+    <string name="accessibility_temperature">Air temperature</string>
+    <string name="accessibility_apparent_temperature">The apparent (or “feels like”) temperature</string>
+    <string name="accessibility_humidity">The relative humidity</string>
+    <string name="accessibility_pressure">The sea-level air pressure</string>
+    <string name="accessibility_wind_speed">Wind speed</string>
+    <string name="accessibility_icon">Forecast icon</string>
+    <string name="accessibility_time">Data point time</string>
+    <string name="accessibility_visibility">The average visibility</string>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     - Used for Article Accessibility purposes                                                     -
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <string name="accessibility_source">The source the article came from</string>
+    <string name="accessibility_title">The headline or title of the article</string>
+    <string name="accessibility_description">A description or snippet from the article</string>
+    <string name="accessibility_url"> The direct URL to the article.</string>
+    <string name="accessibility_thumbnail">The URL to a relevant image for the article.</string>
+    <string name="accessibility_published_date">The date that the article was published ></string>
+    <string name="accessibility_author">The author of the article</string>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    - Used to format Strings                                                                      -
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <string name="format_temperature_fahrenheit"><xllif.g id="temp">%1$.0f</xllif.g></string>
+    <string name="format_temperature_celsius"><xllif.g id="temp">%1$.0f</xllif.g></string>
+    <string name="format_temperature_celsius_notification"><xllif.g id="temp">%1$.0f</xllif.g><xllif.g>°</xllif.g></string>
+    <string name="format_pressure"><xllif.g id="pressure">%1$.0f</xllif.g><xllif.g> kPa </xllif.g></string>
+    <string name="format_wind_speed"><xllif.g id="speed">%1$.0f</xllif.g><xllif.g> mph </xllif.g></string>
+    <string name="format_visibility"><xllif.g id="distance">%1$.0f</xllif.g><xllif.g> mi </xllif.g></string>
+    <string name="format_humidity"><xllif.g id="humidity">%1$.0f</xllif.g><xllif.g>%%</xllif.g></string>
+    <string name="error_search_failed">Error while searching:</string>
+    <string name="fahrenheit_unit"><xllif.g id="unit">°F</xllif.g></string>
+    <string name="celsius_unit"><xllif.g id="unit">°C</xllif.g></string>
+    <string name="format_country_not_supported"><xliff.g> %s </xliff.g>is not supported</string>
+    <string name="format_realFeel">RealFeel <xliff.g id="degrees">%s°</xliff.g></string>
+
+    <!--Article callback message-->
+    <string name="callback_msg_on_empty" translatable="false">onEmpty</string>
+    <string name="callback_msg_on_success" translatable="false">onSuccess</string>
+    <string name="callback_msg_on_null" translatable="false">onNull</string>
+    <string name="callback_msg_on_failure" translatable="false">onFailure</string>
+
+    <!-- content description bis-->
+    <string name="contentDescription">icon</string>
+    <string name="content_description_app_logo">app logo</string>
+    <string name="accessibility_add_to_bookmarks">Add to bookmarks</string>
+    <string name="accessibility_read_more">Read more</string>
+    <string name="accessibility_continue">continue</string>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     - Used as activity shared element transition names                                                                  -
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <string name="forecast_icon_transition_name">Forecast Icon</string>
+    <string name="forecast_temperature_transition_name">Forecast Temperature</string>
+    <string name="forecast_unit_transition_name">Forecast Unit</string>
+
+    <!-- Weather Conditions (From Dark Sky) -->
+    <string name="icon_condition_01" translatable="false">clear-day</string>
+    <string name="icon_condition_02" translatable="false">clear-night</string>
+    <string name="icon_condition_03" translatable="false">rain</string>
+    <string name="icon_condition_04" translatable="false">snow</string>
+    <string name="icon_condition_05" translatable="false">sleet</string>
+    <string name="icon_condition_06" translatable="false">wind</string>
+    <string name="icon_condition_07" translatable="false">fog</string>
+    <string name="icon_condition_08" translatable="false">cloudy</string>
+    <string name="icon_condition_09" translatable="false">partly-cloudy-day</string>
+    <string name="icon_condition_10" translatable="false">partly-cloudy-night</string>
+    <string name="icon_condition_11" translatable="false">hail</string>
+    <string name="icon_condition_12" translatable="false">thunderstorm</string>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     - Strings related to Settings                                                                 -
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!--preference screen titles-->
+    <string name="pref_title_description">Description</string>
+    <string name="pref_category_about">ABOUT</string>
+    <string name="pref_title_licenses">Licenses</string>
+    <string name="pref_title_build_version">Build version</string>
+    <string name="pref_title_credit">API Credits</string>
+    <string name="pref_category_general">GENERAL</string>
+    <string name="pref_title_enable_notifications">Enable notifications</string>
+    <string name="pref_category_notification">NOTIFICATIONS</string>
+    <string name="pref_title_text_size">Article Text Size</string>
+    <string name="pref_title_temp_unit">Temperature units</string>
+    <string name="pref_temp_negativeButtonText">Cancel</string>
+
+    <!--Preferences summaries-->
+    <string name="pref_summary_licenses">License details for open source libraries</string>
+    <string name="pref_summary_description">Quick Headline is a news app highly focused on simplicity, performance and intended for anyone looking for the latest breaking news and information on top stories, weather, business, entertainment, politics, and more.</string>
+    <string name="pref_summary_credit">This app used data powered by The News API,Dark Sky and Google places and Maps APIs</string>
+    <string name="pref_summary_build_version" translatable="false">version 1.0</string>
+
+    <!--SharedPreferences keys for Settings-->
+    <string name="pref_key_enable_notifications" translatable="false">key_enable_notifications</string>
+    <string name="pref_key_temperature_units" translatable="false">key_temperature_units</string>
+    <string name="pref_key_article_text_size" translatable="false">key_article_text_size</string>
+    <string name="pref_summary_enable_notifications_false">Disabled</string>
+    <string name="pref_summary_enable_notifications_true">Enabled</string>
+</resources>

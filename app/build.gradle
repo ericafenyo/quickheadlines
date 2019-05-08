@@ -1,0 +1,113 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'capstone_project_udacity_key'
+            keyPassword '2d68b6d49428a3dc'
+            storeFile file('keystore.jks')
+            storePassword '2d68b6d49428a3dc'
+        }
+    }
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.example.eric.quickheadline"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+        //TODO: Add your Google Places API here
+        //https://developers.google.com/places/android-api/
+        manifestPlaceholders = [placeApiKey: "YOUR_KEY_HERE"]
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildTypes.each {
+        it.buildConfigField 'String', 'NEWS_API_KEY', newsApi
+        it.buildConfigField 'String', 'WEATHER_API_KEY', weatherApi
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    //Support
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:design:${supportLibVersion}"
+    implementation "com.android.support:cardview-v7:${supportLibVersion}"
+    implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
+    implementation "com.android.support:design:${supportLibVersion}"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation "com.android.support:support-vector-drawable:${supportLibVersion}"
+    implementation "com.android.support:support-v4:${supportLibVersion}"
+
+    //preference
+    implementation "com.android.support:preference-v7:${supportLibVersion}"
+
+    //vector-drawable
+    implementation "com.android.support:support-vector-drawable:${supportLibVersion}"
+
+    //Test
+    implementation "com.android.support:support-v4:${supportLibVersion}"
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    //Butter Knife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //Retrofit 2
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    //Dagger 2
+    implementation 'com.google.dagger:dagger:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+
+    //Firebase JobDispatcher
+    implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
+
+    //ViewModel and LiveData
+    implementation 'android.arch.lifecycle:extensions:1.1.0'
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
+    implementation 'android.arch.lifecycle:common-java8:1.1.0'
+
+    //Room
+    implementation 'android.arch.persistence.room:runtime:1.0.0'
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+
+    //play-services-places
+    implementation 'com.google.android.gms:play-services-places:11.8.0'
+    implementation project(':JavaUtil')
+}
