@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Android Support Libraries",
+    "description": "Distributed by The Android Open Source under the Apache License, Version 2.0 "
+  },
+  {
+    "name": "Retrofit 2",
+    "description": "Distributed by Square, Inc. under the Apache License, Version 2.0 "
+  },
+  {
+    "name": "The Firebase JobDispatcher",
+    "description": "Distributed by Google, Inc. under the Apache License, Version 2.0 "
+  },
+  {
+    "name": "Mockito",
+    "description": "Distributed by Mockito contributors under the terms of the MIT License "
+  },
+  {
+    "name": "Butter Knife",
+    "description": "Distributed by Jake Wharton under the Apache License, Version 2.0 "
+  },
+  {
+    "name": "Glide",
+    "description": "Distributed by Google, Inc. under BSD, part MIT and Apache 2.0."
+  },
+  {
+    "name": "Dagger 2",
+    "description": "Distributed by The Dagger Authors under the Apache License, Version 2.0 "
+  },
+  {
+    "name": "Android Architecture Components",
+    "description": "Distributed by The Android Open Source Project, Inc.under the Apache License, Version 2.0 "
+  },
+  {
+    "name": "Gson",
+    "description": "Distributed by Google, Inc. Licensed under the Apache License, Version 2.0 "
+  }
+]
