@@ -33,7 +33,7 @@ import com.example.eric.quickheadline.model.News;
 import com.example.eric.quickheadline.utils.HelperUtils;
 import com.example.eric.quickheadline.utils.JsonUtils;
 import com.example.eric.quickheadline.utils.PreferenceUtils;
-import com.example.javautil.StringUtils;
+import com.example.eric.quickheadline.utils.StringUtils;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
