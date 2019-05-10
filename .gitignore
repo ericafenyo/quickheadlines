@@ -1,9 +1,15 @@
-*.iml
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
 .DS_Store
-/build
-/captures
-.externalNativeBuild
+
+# IntelliJ
+*.iml
+.idea
+.settings
+.project
+
+# Version control
+vcs.xml
+
+# Java class files
+*.class
