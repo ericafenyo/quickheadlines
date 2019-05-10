@@ -42,7 +42,7 @@ public class ConstantFields {
     public static final String PREF_ENABLE_NOTIFICATIONS = "key_enable_notifications";
 
     /*constants representing base urls*/
-    public static final String GEO_NAME_BASE_URL = "http://ws.geonames.org/";
+    public static final String GEO_NAME_BASE_URL = "http://api.geonames.org/";
     public static final String NEWS_BASE_URL = "https://newsapi.org/v2/";
     public static final String MAP_BASE_URL = "https://maps.googleapis.com/maps/api/";
     public static final String WEATHER_BASE_URL = "https://api.darksky.net/";
