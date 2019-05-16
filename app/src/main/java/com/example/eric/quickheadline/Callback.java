@@ -16,7 +16,7 @@
 
 package com.example.eric.quickheadline;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by eric on 06/03/2018.

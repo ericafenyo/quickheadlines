@@ -17,7 +17,7 @@
 package com.example.eric.quickheadline.utils;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.example.eric.quickheadline.R;

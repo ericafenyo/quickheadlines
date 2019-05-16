@@ -21,7 +21,7 @@ package com.example.eric.quickheadline.bookmark;
  * AsyncTask class that provides background thread to perform database query
  */
 
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import com.example.eric.quickheadline.Callback;

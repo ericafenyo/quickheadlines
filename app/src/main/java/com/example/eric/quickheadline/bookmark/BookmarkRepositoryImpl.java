@@ -16,8 +16,8 @@
 
 package com.example.eric.quickheadline.bookmark;
 
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.example.eric.quickheadline.Callback;

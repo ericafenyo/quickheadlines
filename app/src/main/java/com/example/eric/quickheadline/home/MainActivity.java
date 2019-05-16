@@ -18,13 +18,13 @@ package com.example.eric.quickheadline.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.MenuItem;
 import android.view.View;
 
@@ -35,7 +35,6 @@ import com.example.eric.quickheadline.di.MyApp;
 import com.example.eric.quickheadline.discover.DiscoverFragment;
 import com.example.eric.quickheadline.sync.ArticleSyncUtils;
 import com.example.eric.quickheadline.sync.WeatherSyncUtils;
-import com.example.eric.quickheadline.utils.HelperUtils;
 import com.example.eric.quickheadline.utils.PreferenceUtils;
 
 import javax.inject.Inject;
@@ -142,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     /**
      * Sets bottomNavigationMenuItem as checked after the fragment is pop back from backStack
      *
-     * @param fragment {@link android.support.v4.app.Fragment}
+     * @param fragment {@link Fragment}
      */
     private void updateNavMenuItem(Fragment fragment) {
         String fragClassName = fragment.getClass().getName();

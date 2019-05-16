@@ -18,7 +18,7 @@ package com.example.eric.quickheadline.utils;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.eric.quickheadline.R;
 import com.example.eric.quickheadline.model.ArticleCategory;

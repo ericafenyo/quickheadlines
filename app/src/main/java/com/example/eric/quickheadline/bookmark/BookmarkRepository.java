@@ -17,8 +17,8 @@
 package com.example.eric.quickheadline.bookmark;
 
 
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.Nullable;
+import androidx.lifecycle.LiveData;
+import androidx.annotation.Nullable;
 
 import com.example.eric.quickheadline.model.Bookmark;
 

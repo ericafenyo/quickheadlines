@@ -18,7 +18,7 @@ package com.example.eric.quickheadline;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.eric.quickheadline.di.MyApp;

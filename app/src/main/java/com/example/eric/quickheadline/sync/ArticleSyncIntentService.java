@@ -19,7 +19,7 @@ package com.example.eric.quickheadline.sync;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.example.eric.quickheadline.Callback;
 

@@ -16,11 +16,8 @@
 
 package com.example.eric.quickheadline;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.transition.Explode;
-import android.view.Window;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.eric.quickheadline.utils.JsonUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;

@@ -20,7 +20,7 @@ import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.example.eric.quickheadline.di.MyApp;
 import com.example.eric.quickheadline.utils.PreferenceUtils;
