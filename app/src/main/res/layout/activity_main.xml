@@ -16,24 +16,25 @@
   limitations under the License.
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <FrameLayout
+    android:id="@+id/frame_container_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <FrameLayout
-        android:id="@+id/frame_container_main"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        app:itemIconTint="@drawable/nav_selector_icon"
-        app:itemTextColor="@drawable/nav_selector_text"
-        app:menu="@menu/navigation" />
-    </LinearLayout>
+  <com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/navigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    app:itemIconTint="@drawable/nav_selector_icon"
+    app:itemTextColor="@drawable/nav_selector_text"
+    app:labelVisibilityMode="labeled"
+    app:menu="@menu/navigation"/>
+</LinearLayout>

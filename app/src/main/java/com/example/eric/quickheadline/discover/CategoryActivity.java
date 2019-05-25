@@ -16,7 +16,6 @@
 
 package com.example.eric.quickheadline.discover;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,47 +23,45 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.eric.quickheadline.R;
-import com.example.eric.quickheadline.home.WebActivity;
 import com.example.eric.quickheadline.bookmark.BookmarkDb;
 import com.example.eric.quickheadline.bookmark.BookmarkRepositoryImpl;
 import com.example.eric.quickheadline.di.GlideApp;
 import com.example.eric.quickheadline.di.MyApp;
 import com.example.eric.quickheadline.home.SearchAdaptor;
+import com.example.eric.quickheadline.home.WebActivity;
 import com.example.eric.quickheadline.model.ArticleCategory;
 import com.example.eric.quickheadline.model.Bookmark;
 import com.example.eric.quickheadline.utils.CategoryUtils;
 import com.example.eric.quickheadline.utils.ConstantFields;
 import com.example.eric.quickheadline.utils.HelperUtils;
 import com.example.eric.quickheadline.utils.PreferenceUtils;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * displays article category
  */
 public class CategoryActivity extends AppCompatActivity implements SearchAdaptor.onItemSelected {
+
     private static final String LOG_TAG = CategoryActivity.class.getName();//for debugging purpose
     private String mCategory;
     private SearchAdaptor mAdapter;
@@ -96,8 +93,8 @@ public class CategoryActivity extends AppCompatActivity implements SearchAdaptor
         ((MyApp) getApplication()).getComponent().inject(this);
         preferenceUtils = new PreferenceUtils(preferences);
         supportPostponeEnterTransition();
-        if (!HelperUtils.hasInternetConnectivity(this)){
-            HelperUtils.toast(getApplicationContext(),getString(R.string.error_no_internet));
+        if (!HelperUtils.hasInternetConnectivity(this)) {
+            HelperUtils.toast(getApplicationContext(), getString(R.string.error_no_internet));
             progressBar.setVisibility(View.INVISIBLE);
         }
 
@@ -122,19 +119,22 @@ public class CategoryActivity extends AppCompatActivity implements SearchAdaptor
                 ivCategory.setTransitionName(mCategory);
             }
 
-            GlideApp.with(this).load(drawable).placeholder(R.color.colorPrimary).listener(new RequestListener<Drawable>() {
-                @Override
-                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                    supportStartPostponedEnterTransition();
-                    return false;
-                }
+            GlideApp.with(this).load(drawable).placeholder(R.color.colorPrimary)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model,
+                        Target<Drawable> target, boolean isFirstResource) {
+                        supportStartPostponedEnterTransition();
+                        return false;
+                    }
 
-                @Override
-                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                    supportStartPostponedEnterTransition();
-                    return false;
-                }
-            }).into(ivCategory);
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model,
+                        Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        supportStartPostponedEnterTransition();
+                        return false;
+                    }
+                }).into(ivCategory);
         }
         mAdapter = new SearchAdaptor(this, this);
     }
@@ -142,8 +142,10 @@ public class CategoryActivity extends AppCompatActivity implements SearchAdaptor
     @Override
     protected void onStart() {
         super.onStart();
-        DiscoverViewModelFactory factory = new DiscoverViewModelFactory(getApplication(), mCategory);
-        DiscoverViewModel viewModel = ViewModelProviders.of(this, factory).get(DiscoverViewModel.class);
+        DiscoverViewModelFactory factory = new DiscoverViewModelFactory(getApplication(),
+            mCategory);
+        DiscoverViewModel viewModel = ViewModelProviders.of(this, factory)
+            .get(DiscoverViewModel.class);
         viewModel.getArticleByCategory().observe(this, articles -> {
             HelperUtils.hideLoading(recyclerView, progressBar);
             recyclerView.setAdapter(mAdapter);
@@ -173,7 +175,8 @@ public class CategoryActivity extends AppCompatActivity implements SearchAdaptor
     @Override
     public void onLongClick(Bookmark bookmark) {
         try {
-            long[] inserts = BookmarkRepositoryImpl.performInsert(BookmarkDb.getINSTANCE(getApplication()), bookmark);
+            long[] inserts = BookmarkRepositoryImpl
+                .performInsert(BookmarkDb.getINSTANCE(getApplication()), bookmark);
             if (inserts.length > 0) {
                 HelperUtils.makeSnack(coordinatorLayout, "Bookmark Added");
                 preferenceUtils.setIsBookmarked(bookmark.getUrl(), true);

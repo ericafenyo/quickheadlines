@@ -146,6 +146,4 @@ public class DateUtils {
         String month = getUNIXMonth(unixTime);
         return year + "-" + month + "-" + day;
     }
-
-
 }

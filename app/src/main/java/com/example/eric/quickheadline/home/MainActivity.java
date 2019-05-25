@@ -18,16 +18,15 @@ package com.example.eric.quickheadline.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.MenuItem;
-import android.view.View;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.example.eric.quickheadline.ClosingService;
 import com.example.eric.quickheadline.R;
 import com.example.eric.quickheadline.bookmark.BookmarkFragment;
@@ -36,16 +35,14 @@ import com.example.eric.quickheadline.discover.DiscoverFragment;
 import com.example.eric.quickheadline.sync.ArticleSyncUtils;
 import com.example.eric.quickheadline.sync.WeatherSyncUtils;
 import com.example.eric.quickheadline.utils.PreferenceUtils;
-
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * this class handles the bottom navigation and it's associated fragments
  */
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements
+    BottomNavigationView.OnNavigationItemSelectedListener {
 
     private static final String LOG_TAG = MainActivity.class.getName();//for debugging purpose
 
@@ -70,13 +67,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         navigation.setOnNavigationItemSelectedListener(this);
         //select first navigation menu on startup
         if (preferenceUtils.isFirstTimeChecked()) {
-            View view = navigation.findViewById(R.id.navigation_home);
+            View view = navigation.findViewById(R.id.action_headlines);
             view.performClick();
             preferenceUtils.setFirstTimeChecked(false);
         }
 
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
-            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame_container_main);
+            Fragment fragment = getSupportFragmentManager()
+                .findFragmentById(R.id.frame_container_main);
             if (fragment != null) {
                 updateNavMenuItem(fragment);
             }
@@ -107,16 +105,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment;
         switch (item.getItemId()) {
-            case R.id.navigation_home:
+            case R.id.action_headlines:
                 fragment = HomeFragment.newInstance();
                 loadFragment(fragment);
                 return true;
-            case R.id.navigation_discover:
+            case R.id.action_explore:
                 fragment = DiscoverFragment.newInstance();
                 loadFragment(fragment);
 
                 return true;
-            case R.id.navigation_bookmark:
+            case R.id.action_favorites:
                 fragment = BookmarkFragment.newInstance();
                 loadFragment(fragment);
                 return true;

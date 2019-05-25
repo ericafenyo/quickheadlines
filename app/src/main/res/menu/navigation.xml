@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+    android:id="@+id/action_headlines"
+    android:icon="@drawable/ic_outline_home_24px"
+    android:title="@string/title_headlines"/>
 
-    <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home"
-        android:title="@string/title_home" />
+  <item
+    android:id="@+id/action_explore"
+    android:icon="@drawable/ic_outline_explore_24px"
+    android:title="@string/title_explore"/>
 
-    <item
-        android:id="@+id/navigation_discover"
-        android:icon="@drawable/ic_explore"
-        android:title="@string/title_discover" />
+  <item
+    android:id="@+id/action_favorites"
+    android:icon="@drawable/ic_outline_star_border_24px"
+    android:title="@string/title_favorites"/>
 
-    <item
-        android:id="@+id/navigation_bookmark"
-        android:icon="@drawable/ic_bookmark_ticked"
-        android:title="@string/title_bookmark" />
-
+  <item
+    android:id="@+id/action_search"
+    android:icon="@drawable/ic_outline_search_24px"
+    android:title="@string/title_search"/>
 </menu>

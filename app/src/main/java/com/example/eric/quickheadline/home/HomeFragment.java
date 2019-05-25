@@ -17,27 +17,12 @@
 package com.example.eric.quickheadline.home;
 
 
+import static android.provider.BaseColumns._ID;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.transition.Fade;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.fragment.app.Fragment;
-import androidx.loader.app.LoaderManager;
-import androidx.core.content.ContextCompat;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-import androidx.core.util.Pair;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,7 +32,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.example.eric.quickheadline.R;
 import com.example.eric.quickheadline.SettingsActivity;
 import com.example.eric.quickheadline.contract.ArticleEntry;
@@ -56,28 +58,22 @@ import com.example.eric.quickheadline.di.GlideApp;
 import com.example.eric.quickheadline.di.MyApp;
 import com.example.eric.quickheadline.model.Bookmark;
 import com.example.eric.quickheadline.model.News;
+import com.example.eric.quickheadline.utils.DividerItemDecorator;
 import com.example.eric.quickheadline.utils.ForecastUtils;
 import com.example.eric.quickheadline.utils.HelperUtils;
 import com.example.eric.quickheadline.utils.PreferenceUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-import static android.provider.BaseColumns._ID;
 
 /**
  * A simple {@link Fragment} for displaying top article stories
  */
 public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelected {
+
     private static final int ID_ARTICLE_LOADER = 250;
     private static final int ID_WEATHER_LOADER = 856;
-    private static final String LOG_TAG = HomeFragment.class.getName();//for debugging purpose
 
     private ArticleAdapter mAdapter;
 
@@ -106,7 +102,7 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
     public HomeFragment() {
         //Empty public constructor
     }
-    
+
     @Inject
     PreferenceUtils preferenceUtils;
 
@@ -122,17 +118,18 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       /* Inflate the layout for this fragment and setup ButterKnife*/
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+        @Nullable Bundle savedInstanceState) {
+        /* Inflate the layout for this fragment and setup ButterKnife*/
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         ((MyApp) getActivity().getApplication()).getComponent().inject(this);
 
         unitId = preferenceUtils.getTemperatureUnitId();
         mAdapter = new ArticleAdapter(getActivity(), this);
-        //noinspection ConstantConditions
-        getActivity().getSupportLoaderManager().initLoader(ID_ARTICLE_LOADER, null, loaderArticle);
-        getActivity().getSupportLoaderManager().initLoader(ID_WEATHER_LOADER, null, loaderWeather);
+
+        LoaderManager.getInstance(this).initLoader(ID_ARTICLE_LOADER, null, loaderArticle);
+        LoaderManager.getInstance(this).initLoader(ID_WEATHER_LOADER, null, loaderWeather);
 
         weatherCard.setOnClickListener(new onClickImpl());
         return view;
@@ -143,9 +140,11 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-            toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(),R.drawable.ic_round_menu_24px));
+            toolbar.setNavigationIcon(
+                ContextCompat.getDrawable(getActivity(), R.drawable.ic_round_menu_24px));
             //noinspection ConstantConditions
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_top_stories);
+            ((AppCompatActivity) getActivity()).getSupportActionBar()
+                .setTitle(R.string.title_top_stories);
         }
     }
 
@@ -184,7 +183,6 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
         return super.onOptionsItemSelected(item);
     }
 
-
     ////////// ArticleAdapter#onItemSelected Implementations ////////////////////
 
     @Override
@@ -192,11 +190,12 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
         String fragTAG = ArticlePagerFragment.class.getName();
         Fragment fragment = ArticlePagerFragment.newInstance(articles, position);
         getFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
-                .replace(R.id.frame_container_main, fragment, fragment.getTag())
-                .addToBackStack(fragTAG)
-                .commit();
+            .beginTransaction()
+            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                R.anim.enter_from_left, R.anim.exit_to_right)
+            .replace(R.id.frame_container_main, fragment, fragment.getTag())
+            .addToBackStack(fragTAG)
+            .commit();
     }
 
     @Override
@@ -218,8 +217,9 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
                 case ID_ARTICLE_LOADER:
 
                     //noinspection ConstantConditions
-                    return new CursorLoader(getActivity(), ArticleEntry.CONTENT_URI_ARTICLE, null, null, null,
-                            _ID);
+                    return new CursorLoader(getActivity(), ArticleEntry.CONTENT_URI_ARTICLE, null,
+                        null, null,
+                        _ID);
 
                 default:
                     throw new RuntimeException("Loader Not Implemented: " + loaderId);
@@ -230,39 +230,38 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
         public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
             boolean isValidArticleCursor = false;
 
-
             if (data != null && data.moveToFirst()) {
-            /* the Cursor is valid*/
+                /* the Cursor is valid*/
                 isValidArticleCursor = true;
                 HelperUtils.hideLoading(recyclerView, progressBar);
             }
 
             if (!isValidArticleCursor) {
-            /* No data to display, simply return and do nothing */
+                /* No data to display, simply return and do nothing */
                 return;
             }
 
             List<News.Article> articles = new ArrayList<>();
             while (data.moveToNext()) {
 
-                 /* database table column indices for article information */
+                /* database table column indices for article information */
                 int index_source = data.getColumnIndex(ArticleEntry
-                        .COLUMN_NAME_SOURCE);
+                    .COLUMN_NAME_SOURCE);
                 int index_author = data.getColumnIndex(ArticleEntry
-                        .COLUMN_NAME_AUTHOR);
+                    .COLUMN_NAME_AUTHOR);
                 int index_title = data.getColumnIndex(ArticleEntry
-                        .COLUMN_NAME_TITLE);
+                    .COLUMN_NAME_TITLE);
                 int index_description = data.getColumnIndex(ArticleEntry
-                        .COLUMN_NAME_DESCRIPTION);
+                    .COLUMN_NAME_DESCRIPTION);
                 int index_url = data.getColumnIndex(ArticleEntry
-                        .COLUMN_NAME_URL);
+                    .COLUMN_NAME_URL);
                 int index_urlToImage = data.getColumnIndex(ArticleEntry
-                        .COLUMN_NAME_URL_TO_IMAGE);
+                    .COLUMN_NAME_URL_TO_IMAGE);
 
                 int index_publishedDate = data.getColumnIndex(ArticleEntry
-                        .COLUMN_NAME_PUBLISHED_DATE);
+                    .COLUMN_NAME_PUBLISHED_DATE);
 
-                 /* Read the article data from the cursor */
+                /* Read the article data from the cursor */
                 String source = data.getString(index_source);
                 String author = data.getString(index_author);
                 String description = data.getString(index_description);
@@ -273,7 +272,7 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
 
                 //constructs an Article list object
                 articles.add(new News.Article(new News.Source(source), author, title,
-                        description, url, urlToImage, publishedDate));
+                    description, url, urlToImage, publishedDate));
 
                 populateRecyclerView(articles);
             }
@@ -296,15 +295,16 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
         public Loader<Cursor> onCreateLoader(int loaderId, @Nullable Bundle args) {
 
             String[] projection = {
-                    WeatherEntry.COLUMN_NAME_SUMMARY,
-                    WeatherEntry.COLUMN_NAME_TEMPERATURE,
-                    WeatherEntry.COLUMN_NAME_APPARENT_TEMPERATURE,
-                    WeatherEntry.COLUMN_NAME_ICON
+                WeatherEntry.COLUMN_NAME_SUMMARY,
+                WeatherEntry.COLUMN_NAME_TEMPERATURE,
+                WeatherEntry.COLUMN_NAME_APPARENT_TEMPERATURE,
+                WeatherEntry.COLUMN_NAME_ICON
             };
             switch (loaderId) {
                 case ID_WEATHER_LOADER:
-                    return new CursorLoader(getActivity(), WeatherEntry.CONTENT_URI_WEATHER, projection, null, null,
-                            null);
+                    return new CursorLoader(getActivity(), WeatherEntry.CONTENT_URI_WEATHER,
+                        projection, null, null,
+                        null);
                 default:
                     throw new RuntimeException("Loader Not Implemented: " + loaderId);
             }
@@ -328,14 +328,16 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
                 // database table column indices for weather information
                 int index_summary = data.getColumnIndex(WeatherEntry.COLUMN_NAME_SUMMARY);
                 int index_temperature = data.getColumnIndex(WeatherEntry.COLUMN_NAME_TEMPERATURE);
-                int index_apparent_temperature = data.getColumnIndex(WeatherEntry.COLUMN_NAME_APPARENT_TEMPERATURE);
+                int index_apparent_temperature = data
+                    .getColumnIndex(WeatherEntry.COLUMN_NAME_APPARENT_TEMPERATURE);
                 int index_icon = data.getColumnIndex(WeatherEntry.COLUMN_NAME_ICON);
 
                 //set normal and realFeel temperature
                 double temperature = data.getDouble(index_temperature);
                 double apparentTemperature = data.getDouble(index_apparent_temperature);
                 tvTemperature.setText(formatTemperature(unitId, temperature));
-                tvRealFeel.setText(getString(R.string.format_realFeel, formatTemperature(unitId, apparentTemperature)));
+                tvRealFeel.setText(getString(R.string.format_realFeel,
+                    formatTemperature(unitId, apparentTemperature)));
 
                 //setup forecast summary
                 String summary = data.getString(index_summary);
@@ -345,7 +347,8 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
                 String icon = data.getString(index_icon);
                 if (icon != null && icon.length() != 0) {
                     //noinspection ConstantConditions
-                    Drawable drawable = ContextCompat.getDrawable(getActivity(), ForecastUtils.getDrawableForWeatherCondition(getActivity(), icon));
+                    Drawable drawable = ContextCompat.getDrawable(getActivity(),
+                        ForecastUtils.getDrawableForWeatherCondition(getActivity(), icon));
                     GlideApp.with(getActivity()).load(drawable).into(ivIcon);
                 }
             }
@@ -357,15 +360,14 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
         }
     };
 
-
     ////////// Inner Methods ////////////////////
 
 
     /**
      * formats and add appropriate units to temperature values
      *
-     * @param unitId         a shardPreference value that determines which temperature unit to use
-     *                       users can change this value in the apps settings
+     * @param unitId a shardPreference value that determines which temperature unit to use users can
+     * change this value in the apps settings
      * @param tempFahrenheit temperature in degrees Fahrenheit (°F)
      * @return formatted unit-specific temperature
      */
@@ -376,17 +378,23 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
         //To Fahrenheit
         if (unitId.equals(fahrenheitUnitId)) {
             tvUnit.setText(R.string.fahrenheit_unit);
-            return String.format(Locale.getDefault(), getString(R.string.format_temperature_fahrenheit), tempFahrenheit);
+            return String
+                .format(Locale.getDefault(), getString(R.string.format_temperature_fahrenheit),
+                    tempFahrenheit);
 
         }  //To Celsius
         else if (unitId.equals(celsiusUnitId)) {
             tvUnit.setText(R.string.celsius_unit);
             double tempCelsius = ForecastUtils.convertFahrenheitToCelsius(tempFahrenheit);
-            return String.format(Locale.getDefault(), getString(R.string.format_temperature_celsius), tempCelsius);
+            return String
+                .format(Locale.getDefault(), getString(R.string.format_temperature_celsius),
+                    tempCelsius);
         } //Default
         else {
             tvUnit.setText(R.string.fahrenheit_unit);
-            return String.format(Locale.getDefault(), getString(R.string.format_temperature_fahrenheit), tempFahrenheit);
+            return String
+                .format(Locale.getDefault(), getString(R.string.format_temperature_fahrenheit),
+                    tempFahrenheit);
         }
     }
 
@@ -398,7 +406,10 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
             } else if (HelperUtils.isPortraitMode(getActivity())) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
+            DividerItemDecorator itemDecorator = new DividerItemDecorator(requireContext(),
+                LinearLayoutManager.VERTICAL, 16);
             recyclerView.setAdapter(mAdapter);
+//            recyclerView.addItemDecoration(itemDecorator);
             recyclerView.setHasFixedSize(true);
             recyclerView.setNestedScrollingEnabled(false);
             recyclerView.setFocusable(false);
@@ -411,17 +422,22 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
      * launch a detailed view for the weather information
      */
     private class onClickImpl implements View.OnClickListener {
+
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(), WeatherDetailActivity.class);
-            Pair<View, String> forecastIconPair = Pair.create(ivIcon, getActivity().getString(R.string.forecast_icon_transition_name));
-            Pair<View, String> forecastTemp = Pair.create(tvTemperature, getString(R.string.forecast_temperature_transition_name));
-            Pair<View, String> forecastUnit = Pair.create(tvUnit, getString(R.string.forecast_unit_transition_name));
-            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+            Pair<View, String> forecastIconPair = Pair
+                .create(ivIcon, getActivity().getString(R.string.forecast_icon_transition_name));
+            Pair<View, String> forecastTemp = Pair
+                .create(tvTemperature, getString(R.string.forecast_temperature_transition_name));
+            Pair<View, String> forecastUnit = Pair
+                .create(tvUnit, getString(R.string.forecast_unit_transition_name));
+            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(getActivity(),
                     forecastIconPair,
                     forecastTemp,
                     forecastUnit
-            );
+                );
 
             startActivity(intent, optionsCompat.toBundle());
         }

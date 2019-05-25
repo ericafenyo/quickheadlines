@@ -17,28 +17,24 @@
 package com.example.eric.quickheadline.home;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.example.eric.quickheadline.R;
 import com.example.eric.quickheadline.di.GlideApp;
 import com.example.eric.quickheadline.model.Bookmark;
 import com.example.eric.quickheadline.model.News;
 import com.example.eric.quickheadline.utils.DateUtils;
-
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
- * Created by eric on 07/03/2018.
- * a simple RecyclerView adapter class
+ * Created by eric on 07/03/2018. a simple RecyclerView adapter class
  */
 
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder> {
@@ -58,6 +54,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     //Item click listener Interface
     public interface onItemSelected {
+
         void onClick(int position, List<News.Article> articles);
 
         void onLongClick(Bookmark bookmark);
@@ -67,7 +64,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     @Override
     public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ArticleViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout
-                .list_item_article, parent, false));
+            .list_item_article, parent, false));
     }
 
     @Override
@@ -75,13 +72,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
         News.Article articles = mData.get(position);
 
-        holder.tvArticleTitle.setText(articles.getTitle());
-        holder.tvArticleSource.setText(articles.getSource().getName());
+        holder.textArticleTitle.setText(articles.getTitle());
+        holder.textArticleSource.setText(articles.getSource().getName());
         String utcDate = DateUtils.getUTCDate(articles.getPublishedAt());
-        holder.textArticleDescription.setText(articles.getDescription());
+        holder.textArticlePublishedTime.setText(utcDate);
 
         GlideApp.with(mContext).load(articles.getUrlToImage()).placeholder((R.color.colorGrayLight))
-                .into(holder.ivArticleThumbnail);
+            .into(holder.imageArticleThumbnail);
     }
 
     @Override
@@ -89,15 +86,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         return mData == null ? 0 : mData.size();
     }
 
-    public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+        View.OnLongClickListener {
 
-        @BindView(R.id.image_article_thumbnail) ImageView ivArticleThumbnail;
-
-        @BindView(R.id.text_article_source) TextView tvArticleSource;
-
-        @BindView(R.id.text_article_title) TextView tvArticleTitle;
-
-        @BindView(R.id.text_article_description) TextView textArticleDescription;
+        @BindView(R.id.image_article_thumbnail) ImageView imageArticleThumbnail;
+        @BindView(R.id.text_article_source) TextView textArticleSource;
+        @BindView(R.id.text_article_title) TextView textArticleTitle;
+        @BindView(R.id.text_article_published_time) TextView textArticlePublishedTime;
 
         public ArticleViewHolder(View itemView) {
             super(itemView);
@@ -125,12 +120,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     private Bookmark provideBookmark(int position) {
         News.Article articles = mData.get(position);
         return new Bookmark.Builder().setTitle(articles.getTitle())
-                .setDescription(articles.getDescription())
-                .setSource(articles.getSource().getName())
-                .setPublishedAt(articles.getPublishedAt())
-                .setAuthor(articles.getAuthor())
-                .setUrl(articles.getUrl())
-                .setUrlToImage(articles.getUrlToImage())
-                .build();
+            .setDescription(articles.getDescription())
+            .setSource(articles.getSource().getName())
+            .setPublishedAt(articles.getPublishedAt())
+            .setAuthor(articles.getAuthor())
+            .setUrl(articles.getUrl())
+            .setUrlToImage(articles.getUrlToImage())
+            .build();
     }
 }
