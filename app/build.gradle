@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     signingConfigs {
@@ -20,7 +23,7 @@ android {
 
         //TODO: Add your Google Places API here
         //https://developers.google.com/places/android-api/
-         manifestPlaceholders = [placeApiKey: "YOUR_KEY_HERE"]
+        manifestPlaceholders = [placeApiKey: "YOUR_KEY_HERE"]
 
     }
     buildTypes {
@@ -76,14 +79,14 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
     //Gson
     implementation 'com.google.code.gson:gson:2.8.2'
 
     //Butter Knife
     implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    kapt 'com.jakewharton:butterknife-compiler:10.1.0'
 
     //Retrofit 2
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
@@ -92,20 +95,26 @@ dependencies {
 
     //Dagger 2
     implementation 'com.google.dagger:dagger:2.20'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    kapt 'com.google.dagger:dagger-compiler:2.11'
 
     //Firebase JobDispatcher
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
     //ViewModel and LiveData
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0'
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.0.0'
 
     //Room
     implementation 'androidx.room:room-runtime:2.0.0'
-    annotationProcessor 'androidx.room:room-compiler:2.0.0'
+    kapt 'androidx.room:room-compiler:2.0.0'
 
     //play-services-places
     implementation 'com.google.android.gms:play-services-places:16.1.0'
+    implementation "androidx.core:core-ktx:1.0.2"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
