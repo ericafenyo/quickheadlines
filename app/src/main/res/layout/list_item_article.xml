@@ -27,7 +27,7 @@
     style="@style/TextAppearance.Overline"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="32dp"
+    android:layout_marginTop="24dp"
     android:layout_marginStart="@dimen/activity_horizontal_margin"
     android:contentDescription="@string/accessibility_source"
     app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:layout_marginBottom="32dp"
+    android:layout_marginBottom="8dp"
     android:layout_marginStart="@dimen/activity_horizontal_margin"
     android:layout_marginEnd="16dp"
     android:contentDescription="@string/accessibility_title"
@@ -49,21 +49,20 @@
     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@+id/image_article_thumbnail"
-    app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/text_article_source"
+    app:layout_constraintVertical_bias="0.0"
     tools:text="Paris attacker identified as Chechen-born French citizen"/>
 
   <ImageView
     android:id="@+id/image_article_thumbnail"
     android:layout_width="64dp"
     android:layout_height="64dp"
-    android:layout_marginTop="16dp"
     android:layout_marginEnd="@dimen/activity_horizontal_margin"
     android:contentDescription="@string/accessibility_thumbnail"
     android:scaleType="centerCrop"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/text_article_published_time"
     tools:src="@drawable/business"/>
 
   <TextView
@@ -77,5 +76,15 @@
     app:layout_constraintTop_toTopOf="@+id/text_article_source"
     tools:text="@tools:sample/date/mmddyy"/>
 
+  <View
+    android:id="@+id/divider"
+    android:layout_width="wrap_content"
+    android:layout_height="8dp"
+    android:layout_marginTop="24dp"
+    android:background="@drawable/list_divider"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/text_article_title"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

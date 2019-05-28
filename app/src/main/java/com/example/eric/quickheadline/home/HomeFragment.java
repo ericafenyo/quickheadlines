@@ -38,6 +38,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
@@ -85,7 +86,7 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
     @BindView(R.id.progress_bar_home)
     ProgressBar progressBar;
     @BindView(R.id.weather_card)
-    CardView weatherCard;
+    ConstraintLayout weatherCard;
 
     /*weather fields*/
     @BindView(R.id.tv_summary)
@@ -408,13 +409,7 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
 
-            HorizontalDividerItemDecoration itemDecorator = new Builder(requireContext())
-                .size(1)
-                .margin(32, 32)
-                .build();
-
             recyclerView.setAdapter(mAdapter);
-            recyclerView.addItemDecoration(itemDecorator);
             recyclerView.setHasFixedSize(true);
             recyclerView.setNestedScrollingEnabled(false);
             recyclerView.setFocusable(false);

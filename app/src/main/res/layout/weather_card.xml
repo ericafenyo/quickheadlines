@@ -15,107 +15,95 @@
   -->
 
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/size_weather_card_height"
-    android:layout_margin="@dimen/margin_padding_small">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/weather_card"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/size_weather_card_height"
+  android:layout_margin="@dimen/margin_padding_small"
+  android:background="@color/colorWhite">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+  <TextView
+    android:id="@+id/tv_summary"
+    style="@style/Caption"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+    android:contentDescription="@string/accessibility_summary"
+    android:textAlignment="center"
+    android:textColor="@color/ColorMediumEmphasisDark"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/guideline_centre"
+    app:layout_constraintStart_toStartOf="parent"
+    tools:targetApi="lollipop"
+    tools:text="Cloud"/>
 
-        <TextView
-            android:id="@+id/tv_summary"
-            style="@style/Caption"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:contentDescription="@string/accessibility_summary"
-            android:textAlignment="center"
-            android:textColor="@color/ColorMediumEmphasisDark"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_centre"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:targetApi="lollipop"
-            tools:text="Cloud" />
+  <TextView
+    android:id="@+id/tv_unit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+    android:transitionName="@string/forecast_unit_transition_name"
+    app:layout_constraintStart_toEndOf="@+id/tv_temperature"
+    app:layout_constraintTop_toTopOf="@+id/tv_temperature"
+    tools:targetApi="lollipop"
+    tools:text="°F"/>
 
-        <TextView
-            android:id="@+id/tv_unit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_title"
-            android:transitionName="@string/forecast_unit_transition_name"
-            app:layout_constraintStart_toEndOf="@+id/tv_temperature"
-            app:layout_constraintTop_toTopOf="@+id/tv_temperature"
-            tools:targetApi="lollipop"
-            tools:text="°F" />
+  <ImageView
+    android:id="@+id/iv_icon"
+    android:layout_width="@dimen/icon_size_weather_condition"
+    android:layout_height="@dimen/icon_size_weather_condition"
+    android:layout_marginBottom="@dimen/margin_padding_small"
+    android:contentDescription="@string/accessibility_icon"
+    android:transitionName="@string/forecast_icon_transition_name"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/guideline_centre"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:srcCompat="@drawable/ic_thunder_storms"
+    tools:targetApi="lollipop"/>
 
-        <ImageView
-            android:id="@+id/iv_icon"
-            android:layout_width="@dimen/icon_size_weather_condition"
-            android:layout_height="@dimen/icon_size_weather_condition"
-            android:layout_marginBottom="@dimen/margin_padding_small"
-            android:contentDescription="@string/accessibility_icon"
-            android:transitionName="@string/forecast_icon_transition_name"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_centre"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/ic_thunder_storms"
-            tools:targetApi="lollipop" />
+  <TextView
+    android:id="@+id/tv_apparent_temperature"
+    style="@style/Caption"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="@dimen/margin_padding_small"
+    android:contentDescription="@string/accessibility_apparent_temperature"
+    android:textColor="@color/ColorMediumEmphasisDark"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="@+id/guideline_centre"
+    app:layout_constraintTop_toTopOf="@+id/tv_summary"
+    tools:targetApi="lollipop"
+    tools:text="RealFeels : 0˚"/>
 
-        <TextView
-            android:id="@+id/tv_apparent_temperature"
-            style="@style/Caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_padding_small"
-            android:layout_marginStart="8dp"
-            android:contentDescription="@string/accessibility_apparent_temperature"
-            android:textColor="@color/ColorMediumEmphasisDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline_centre"
-            app:layout_constraintTop_toTopOf="@+id/tv_summary"
-            tools:targetApi="lollipop"
-            tools:text="RealFeels : 0˚" />
+  <TextView
+    android:id="@+id/tv_temperature"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="60dp"
+    android:contentDescription="@string/accessibility_temperature"
+    android:includeFontPadding="false"
+    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
+    android:transitionName="@string/forecast_temperature_transition_name"
+    app:layout_constraintBottom_toBottomOf="@+id/iv_icon"
+    app:layout_constraintStart_toStartOf="@+id/guideline_centre"
+    app:layout_constraintTop_toTopOf="@+id/iv_icon"
+    app:layout_constraintVertical_bias="1.0"
+    tools:targetApi="lollipop"
+    tools:text="2"/>
 
-        <TextView
-            android:id="@+id/tv_temperature"
-            style="@style/Headline_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:contentDescription="@string/accessibility_temperature"
-            android:includeFontPadding="false"
-            android:transitionName="@string/forecast_temperature_transition_name"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_icon"
-            app:layout_constraintStart_toStartOf="@+id/guideline_centre"
-            app:layout_constraintTop_toTopOf="@+id/iv_icon"
-            app:layout_constraintVertical_bias="1.0"
-            tools:targetApi="lollipop"
-            tools:text="2" />
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/guideline_centre"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.5"/>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_centre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--<View-->
-    <!--android:id="@+id/view"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:foreground="?selectableItemBackground"-->
-    <!--android:selectable="true" />-->
-
-</androidx.cardview.widget.CardView>
 
