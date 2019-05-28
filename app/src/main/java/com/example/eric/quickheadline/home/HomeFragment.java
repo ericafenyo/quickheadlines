@@ -58,10 +58,11 @@ import com.example.eric.quickheadline.di.GlideApp;
 import com.example.eric.quickheadline.di.MyApp;
 import com.example.eric.quickheadline.model.Bookmark;
 import com.example.eric.quickheadline.model.News;
-import com.example.eric.quickheadline.utils.DividerItemDecorator;
 import com.example.eric.quickheadline.utils.ForecastUtils;
 import com.example.eric.quickheadline.utils.HelperUtils;
 import com.example.eric.quickheadline.utils.PreferenceUtils;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration.Builder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -406,10 +407,14 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
             } else if (HelperUtils.isPortraitMode(getActivity())) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
-            DividerItemDecorator itemDecorator = new DividerItemDecorator(requireContext(),
-                LinearLayoutManager.VERTICAL, 16);
+
+            HorizontalDividerItemDecoration itemDecorator = new Builder(requireContext())
+                .size(1)
+                .margin(32, 32)
+                .build();
+
             recyclerView.setAdapter(mAdapter);
-//            recyclerView.addItemDecoration(itemDecorator);
+            recyclerView.addItemDecoration(itemDecorator);
             recyclerView.setHasFixedSize(true);
             recyclerView.setNestedScrollingEnabled(false);
             recyclerView.setFocusable(false);

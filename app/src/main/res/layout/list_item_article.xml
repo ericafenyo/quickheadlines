@@ -19,30 +19,35 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content">
+  android:layout_height="wrap_content"
+  android:background="@color/colorWhite">
 
   <TextView
     android:id="@+id/text_article_source"
+    style="@style/TextAppearance.Overline"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
+    android:layout_marginTop="32dp"
     android:layout_marginStart="@dimen/activity_horizontal_margin"
     android:contentDescription="@string/accessibility_source"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="@tools:sample/full_names"/>
 
   <TextView
     android:id="@+id/text_article_title"
+    style="@style/TextAppearance.Subtitle1"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
+    android:layout_marginBottom="32dp"
     android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginEnd="16dp"
     android:contentDescription="@string/accessibility_title"
     android:ellipsize="end"
-    android:maxLines="3"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+    android:maxLines="2"
+    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@+id/image_article_thumbnail"
     app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
@@ -51,47 +56,26 @@
 
   <ImageView
     android:id="@+id/image_article_thumbnail"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
+    android:layout_width="64dp"
+    android:layout_height="64dp"
+    android:layout_marginTop="16dp"
     android:layout_marginEnd="@dimen/activity_horizontal_margin"
     android:contentDescription="@string/accessibility_thumbnail"
     android:scaleType="centerCrop"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/text_article_title"
+    app:layout_constraintTop_toTopOf="parent"
     tools:src="@drawable/business"/>
 
   <TextView
     android:id="@+id/text_article_published_time"
+    style="@style/TextAppearance.Overline"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginEnd="16dp"
     android:contentDescription="@string/accessibility_description"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-    app:layout_constraintBottom_toBottomOf="@+id/action_more"
-
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/action_more"
-    app:layout_constraintVertical_bias="1.0"
+    app:layout_constraintEnd_toStartOf="@+id/image_article_thumbnail"
+    app:layout_constraintTop_toTopOf="@+id/text_article_source"
     tools:text="@tools:sample/date/mmddyy"/>
 
-  <androidx.constraintlayout.widget.Barrier
-    android:id="@+id/barrier"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:barrierDirection="bottom"
-    app:constraint_referenced_ids="image_article_thumbnail,text_article_title"
-    tools:layout_editor_absoluteY="60dp"/>
 
-  <ImageView
-    android:id="@+id/action_more"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-    android:layout_marginRight="6dp"
-    android:contentDescription="@string/accessibility_option_menu"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/barrier"
-    app:srcCompat="@drawable/ic_outline_more_vert_24px"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
