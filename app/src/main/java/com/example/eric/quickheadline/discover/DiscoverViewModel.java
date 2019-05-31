@@ -17,43 +17,37 @@
 package com.example.eric.quickheadline.discover;
 
 import android.app.Application;
+import android.util.Log;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.annotation.NonNull;
-import android.util.Log;
-
 import com.example.eric.quickheadline.BuildConfig;
 import com.example.eric.quickheadline.di.ApiEndpoint;
 import com.example.eric.quickheadline.di.MyApp;
 import com.example.eric.quickheadline.model.News;
 import com.example.eric.quickheadline.utils.ConstantFields;
 import com.example.eric.quickheadline.utils.JsonUtils;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.io.IOException;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
-
+import org.json.JSONArray;
+import org.json.JSONException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by eric on 13/03/2018.
- * a viewModel class that
- * prepares and stores observable data for an observer
+ * Created by eric on 13/03/2018. a viewModel class that prepares and stores observable data for an
+ * observer
  */
 
 public class DiscoverViewModel extends AndroidViewModel {
+
     private static final String TAG = DiscoverViewModel.class.getName();
     private MutableLiveData<List<News.Article>> mArticleByCategory;
     private String mCategory;
-
 
     @Inject
     @Named("article")
@@ -89,7 +83,8 @@ public class DiscoverViewModel extends AndroidViewModel {
             e.printStackTrace();
         }
 
-        endpoint.getCategory(mCategory, country, ConstantFields.QUERY_PARAMS_PAGE_SIZE, BuildConfig.NEWS_API_KEY).enqueue(new Callback<News>() {
+        endpoint.getCategory(mCategory, country, ConstantFields.QUERY_PARAMS_PAGE_SIZE,
+            BuildConfig.NEWS_API_KEY).enqueue(new Callback<News>() {
 
             @Override
             public void onResponse(Call<News> call, Response<News> response) {

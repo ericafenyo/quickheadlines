@@ -18,38 +18,36 @@ package com.example.eric.quickheadline.discover;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.example.eric.quickheadline.R;
 import com.example.eric.quickheadline.SettingsActivity;
 import com.example.eric.quickheadline.model.ArticleCategory;
 import com.example.eric.quickheadline.utils.CategoryUtils;
 import com.example.eric.quickheadline.utils.HelperUtils;
-
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 /**
  * a simple fragment class to display article categories
  */
 public class DiscoverFragment extends Fragment {
+
     @BindView(R.id.recycler_view_discover)
     RecyclerView recyclerView;
     @BindView(R.id.toolbar_discover)
@@ -72,7 +70,8 @@ public class DiscoverFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+        @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_discover, container, false);
         ButterKnife.bind(this, view);
@@ -98,9 +97,11 @@ public class DiscoverFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-            toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(),R.drawable.ic_round_menu_24px));
+            toolbar.setNavigationIcon(
+                ContextCompat.getDrawable(getActivity(), R.drawable.ic_round_menu_24px));
             //noinspection ConstantConditions
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_discover);
+            ((AppCompatActivity) getActivity()).getSupportActionBar()
+                .setTitle(R.string.title_discover);
         }
     }
 

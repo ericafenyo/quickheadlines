@@ -17,28 +17,24 @@
 package com.example.eric.quickheadline.home;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.example.eric.quickheadline.R;
 import com.example.eric.quickheadline.di.GlideApp;
 import com.example.eric.quickheadline.model.Bookmark;
 import com.example.eric.quickheadline.model.News;
 import com.example.eric.quickheadline.utils.DateUtils;
-
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
- * Created by eric on 07/03/2018.
- * a RecyclerView adapter class
+ * Created by eric on 07/03/2018. a RecyclerView adapter class
  */
 
 public class SearchAdaptor extends RecyclerView.Adapter<SearchAdaptor.SearchViewHolder> {
@@ -46,7 +42,6 @@ public class SearchAdaptor extends RecyclerView.Adapter<SearchAdaptor.SearchView
     private Context mContext;
     private List<News.Article> mData;
     private onItemSelected mOnItemSelected;
-
 
     public SearchAdaptor(Context mContext, onItemSelected mOnItemSelected) {
         this.mContext = mContext;
@@ -59,9 +54,10 @@ public class SearchAdaptor extends RecyclerView.Adapter<SearchAdaptor.SearchView
 
     @NonNull
     @Override
-    public SearchAdaptor.SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchAdaptor.SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+        int viewType) {
         return new SearchViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout
-                .list_item_search, parent, false));
+            .list_item_article, parent, false));
     }
 
     @Override
@@ -75,7 +71,7 @@ public class SearchAdaptor extends RecyclerView.Adapter<SearchAdaptor.SearchView
         holder.tvArticlePublishedDate.setText(DateUtils.getLocalDate(utcDate));
 
         GlideApp.with(mContext).load(articles.getUrlToImage()).placeholder((R.color.colorGrayLight))
-                .into(holder.ivArticleThumbnail);
+            .into(holder.ivArticleThumbnail);
     }
 
     @Override
@@ -90,31 +86,30 @@ public class SearchAdaptor extends RecyclerView.Adapter<SearchAdaptor.SearchView
     private Bookmark provideBookmark(int position) {
         News.Article articles = mData.get(position);
         return new Bookmark.Builder().setTitle(articles.getTitle())
-                .setDescription(articles.getDescription())
-                .setSource(articles.getSource().getName())
-                .setPublishedAt(articles.getPublishedAt())
-                .setAuthor(articles.getAuthor())
-                .setUrl(articles.getUrl())
-                .setUrlToImage(articles.getUrlToImage())
-                .build();
+            .setDescription(articles.getDescription())
+            .setSource(articles.getSource().getName())
+            .setPublishedAt(articles.getPublishedAt())
+            .setAuthor(articles.getAuthor())
+            .setUrl(articles.getUrl())
+            .setUrlToImage(articles.getUrlToImage())
+            .build();
     }
 
     //Item click listener Interface
     public interface onItemSelected {
+
         void onClick(String url);
 
         void onLongClick(Bookmark bookmark);
     }
 
-    public class SearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        @BindView(R.id.tv_search_article_title)
-        TextView tvArticleTitle;
-        @BindView(R.id.tv_search_article_source)
-        TextView tvArticleSource;
-        @BindView(R.id.tv_search_article_publish_time)
-        TextView tvArticlePublishedDate;
-        @BindView(R.id.iv_search_article_thumbnail)
-        ImageView ivArticleThumbnail;
+    public class SearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+        View.OnLongClickListener {
+
+        @BindView(R.id.text_article_title) TextView tvArticleTitle;
+        @BindView(R.id.text_article_source) TextView tvArticleSource;
+        @BindView(R.id.text_article_published_time) TextView tvArticlePublishedDate;
+        @BindView(R.id.image_article_thumbnail) ImageView ivArticleThumbnail;
 
         public SearchViewHolder(View itemView) {
             super(itemView);
