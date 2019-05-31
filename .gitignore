@@ -1,7 +1,7 @@
 .DS_Store
 
 # Built application files
-*.apk
+*.apkcl
 *.ap_
 *.aab
 
@@ -62,3 +62,4 @@ google-services.json
 
 # Version control
 vcs.xml
+app/sampledata/
