@@ -14,73 +14,63 @@
   limitations under the License.
   -->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="@dimen/margin_padding_small"
+  android:layout_marginBottom="@dimen/margin_padding_small"
+  android:layout_marginStart="@dimen/margin_padding_normal"
+  android:layout_marginEnd="@dimen/margin_padding_normal"
+  android:theme="@style/Widget.MaterialComponents.CardView"
+  app:cardBackgroundColor="@color/colorWhite"
+  app:cardElevation="@dimen/size_view_divider">
+
+  <LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_padding_small"
-    android:layout_marginTop="@dimen/margin_padding_small"
-    android:layout_marginEnd="@dimen/margin_padding_normal"
-    android:layout_marginStart="@dimen/margin_padding_normal"
-    app:cardElevation="@dimen/size_view_divider">
+    android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <ImageView
+      android:id="@+id/iv_bookmark_article_thumbnail"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/size_bookmark_image"
+      android:layout_marginTop="@dimen/margin_padding_normal"
+      android:layout_marginStart="@dimen/margin_padding_normal"
+      android:layout_marginEnd="@dimen/activity_horizontal_margin"
+      android:contentDescription="@string/accessibility_thumbnail"
+      android:scaleType="centerCrop"
+      tools:src="@tools:sample/avatars"/>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    <TextView
+      android:id="@+id/tv_bookmark_article_title"
+      style="@style/TextAppearance.Headline6"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/activity_horizontal_margin"
+      android:layout_marginTop="@dimen/margin_padding_xsmall"
+      android:layout_marginStart="@dimen/activity_horizontal_margin"
+      android:contentDescription="@string/accessibility_title"
+      tools:text="@sample/articles.json/articles/title"/>
 
-            android:orientation="vertical">
+    <TextView
+      android:id="@+id/tv_bookmark_article_description"
+      style="@style/TextAppearance.Body1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_horizontal_margin"
+      android:layout_marginEnd="@dimen/activity_horizontal_margin"
+      android:contentDescription="@string/accessibility_description"
+      android:textColor="@color/colorArticleTitle"/>
 
-            <ImageView
-                android:id="@+id/iv_bookmark_article_thumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_bookmark_image"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/margin_padding_normal"
-                android:layout_marginTop="@dimen/margin_padding_normal"
-                android:contentDescription="@string/accessibility_thumbnail"
-                android:scaleType="centerCrop"
-                tools:src="@color/colorGrayDark" />
-
-            <TextView
-                android:id="@+id/tv_bookmark_article_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/margin_padding_xsmall"
-                android:contentDescription="@string/accessibility_title"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-            <TextView
-                android:id="@+id/tv_bookmark_article_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:textColor="@color/colorArticleTitle"
-                android:contentDescription="@string/accessibility_description"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <TextView
-                android:id="@+id/tv_bookmark_article_publish_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:contentDescription="@string/accessibility_description"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_view_divider"
-            android:background="?selectableItemBackground" />
-    </FrameLayout>
+    <TextView
+      android:id="@+id/tv_bookmark_article_publish_date"
+      style="@style/TextAppearance.Caption"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/activity_horizontal_margin"
+      android:layout_marginStart="@dimen/activity_horizontal_margin"
+      android:contentDescription="@string/accessibility_description"/>
+  </LinearLayout>
 </androidx.cardview.widget.CardView>

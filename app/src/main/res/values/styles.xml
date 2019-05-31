@@ -16,23 +16,39 @@
 
   <style name="TextAppearance"/>
 
-  <style name="TextAppearance.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
-    <item name="fontFamily">@font/merriweather_bold</item>
+
+  <style name="TextAppearance.Headline1." parent="TextAppearance.MaterialComponents.Headline1">
+    <item name="fontFamily">@font/merriweather_black_italic</item>
   </style>
 
-  <style name="TextAppearance.Headline1." parent="TextAppearance.MaterialComponents.Headline1"/>
+  <style name="TextAppearance.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+    <item name="fontFamily">@font/libre_franklin_light</item>
+  </style>
 
-  <style name="TextAppearance.Headline2" parent="TextAppearance.MaterialComponents.Headline2"/>
+  <style name="TextAppearance.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+    <item name="fontFamily">@font/merriweather_black_italic</item>
+  </style>
 
-  <style name="TextAppearance.Headline3" parent="TextAppearance.MaterialComponents.Headline3"/>
+  <style name="TextAppearance.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+    <item name="fontFamily">@font/libre_franklin_bold_italic</item>
+    <item name="android:textColor">@color/ColorHighEmphasisDark</item>
+  </style>
 
-  <style name="TextAppearance.Headline4" parent="TextAppearance.MaterialComponents.Headline4"/>
+  <style name="TextAppearance.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+    <item name="fontFamily">@font/libre_franklin</item>
+  </style>
 
-  <style name="TextAppearance.Headline5" parent="TextAppearance.MaterialComponents.Headline5"/>
+  <style name="TextAppearance.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+    <item name="fontFamily">@font/merriweather_bold_italic</item>
+  </style>
 
-  <style name="TextAppearance.Headline6" parent="TextAppearance.MaterialComponents.Headline6"/>
+  <style name="TextAppearance.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+    <item name="fontFamily">@font/libre_franklin_medium</item>
+  </style>
 
-  <style name="TextAppearance.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2"/>
+  <style name="TextAppearance.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+    <item name="fontFamily">@font/merriweather_bold</item>
+  </style>
 
   <style name="TextAppearance.Caption" parent="TextAppearance.MaterialComponents.Caption"/>
 
@@ -40,9 +56,13 @@
     <item name="fontFamily">@font/libre_franklin_bold</item>
   </style>
 
-  <style name="TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1"/>
+  <style name="TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1">
+    <item name="fontFamily">@font/merriweather</item>
+  </style>
 
-  <style name="TextAppearance.Body2" parent="TextAppearance.MaterialComponents.Body2"/>
+  <style name="TextAppearance.Body2" parent="TextAppearance.MaterialComponents.Body2">
+    <item name="fontFamily">@font/libre_franklin</item>
+  </style>
 
 
 </resources>
