@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/frame_container_settings"
         android:layout_marginTop="@dimen/margin_padding_large"
-        class="com.example.eric.quickheadline.SettingFragment"
+        class="com.ericafenyo.quickheadline.SettingFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

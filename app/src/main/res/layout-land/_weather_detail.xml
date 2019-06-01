@@ -23,7 +23,7 @@
   android:baselineAligned="false"
   android:orientation="horizontal"
   app:layout_behavior="@string/appbar_scrolling_view_behavior"
-  tools:context="com.example.eric.quickheadline.home.WeatherDetailActivity">
+  tools:context="com.ericafenyo.quickheadline.home.WeatherDetailActivity">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/constraint_layout_top"

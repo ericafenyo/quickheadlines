@@ -26,7 +26,7 @@
 
   <TextView
     android:id="@+id/tv_summary"
-    style="@style/Caption"
+    style="@style/TextAppearance.Caption"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/activity_horizontal_margin"
@@ -68,7 +68,7 @@
 
   <TextView
     android:id="@+id/tv_apparent_temperature"
-    style="@style/Caption"
+    style="@style/TextAppearance.Caption"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"

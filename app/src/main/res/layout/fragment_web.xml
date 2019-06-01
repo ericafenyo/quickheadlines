@@ -41,7 +41,7 @@
     <FrameLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      tools:context="com.example.eric.quickheadline.WebFragment">
+      tools:context="com.ericafenyo.quickheadline.WebFragment">
 
       <WebView
         android:id="@+id/web_view"
