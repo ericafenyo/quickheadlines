@@ -23,7 +23,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -74,7 +73,7 @@ public class BookmarkFragment extends Fragment implements BookmarkAdapter.onItem
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-            toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(),R.drawable.ic_round_menu_24px));
+
             //noinspection ConstantConditions
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_bookmark);
         }

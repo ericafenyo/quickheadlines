@@ -41,9 +41,7 @@ import butterknife.ButterKnife;
 public class LicenseActivity extends AppCompatActivity {
 
     private static final String TAG = LicenseActivity.class.getName();
-    private LicenseAdapter mAdapter;
-    @BindView(R.id.list_view_license)
-    ListView listView;
+    @BindView(R.id.list_view_license)ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +58,7 @@ public class LicenseActivity extends AppCompatActivity {
         }
 
         //initialize the Adapter
-        mAdapter = new LicenseAdapter(this);
+        LicenseAdapter mAdapter = new LicenseAdapter(this);
 
         String jsonFileName = "json/open_source_library_license.json";
         Type type = new TypeToken<List<OSLicense>>() {

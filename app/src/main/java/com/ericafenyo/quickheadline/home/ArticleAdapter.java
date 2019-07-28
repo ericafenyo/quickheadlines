@@ -55,10 +55,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     //Item click listener Interface
     public interface onItemSelected {
-
         void onClick(int position, List<News.Article> articles);
-
-        void onLongClick(Bookmark bookmark);
     }
 
     @NonNull
@@ -87,6 +84,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
         GlideApp.with(mContext).load(articles.getUrlToImage()).placeholder((R.color.colorGrayLight))
             .into(holder.imageArticleThumbnail);
+
+        holder.textArticleDescription.setText(articles.getDescription());
     }
 
     @Override
@@ -94,19 +93,18 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         return mData == null ? 0 : mData.size();
     }
 
-    public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
-        View.OnLongClickListener {
+    public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @BindView(R.id.image_article_thumbnail) ImageView imageArticleThumbnail;
         @BindView(R.id.text_article_source) TextView textArticleSource;
         @BindView(R.id.text_article_title) TextView textArticleTitle;
         @BindView(R.id.text_article_published_time) TextView textArticlePublishedTime;
+        @BindView(R.id.text_article_description) TextView textArticleDescription;
 
         public ArticleViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -114,11 +112,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
             mOnItemSelected.onClick(getAdapterPosition(), mData);
         }
 
-        @Override
-        public boolean onLongClick(View v) {
-            mOnItemSelected.onLongClick(provideBookmark(getAdapterPosition()));
-            return true;
-        }
     }
 
     /**

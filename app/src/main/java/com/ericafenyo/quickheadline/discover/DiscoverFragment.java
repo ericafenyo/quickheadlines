@@ -29,7 +29,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +36,7 @@ import com.ericafenyo.quickheadline.R;
 import com.ericafenyo.quickheadline.SettingsActivity;
 import com.ericafenyo.quickheadline.model.ArticleCategory;
 import com.ericafenyo.quickheadline.utils.CategoryUtils;
+import com.ericafenyo.quickheadline.utils.GridSpaceItemDecoration;
 import com.ericafenyo.quickheadline.utils.HelperUtils;
 import java.util.List;
 
@@ -76,8 +76,11 @@ public class DiscoverFragment extends Fragment {
 
         if (HelperUtils.isLandscapeMode(getActivity())) {
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+
+            recyclerView.addItemDecoration(new GridSpaceItemDecoration(3, 16));
         } else if (HelperUtils.isPortraitMode(getActivity())) {
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            recyclerView.addItemDecoration(new GridSpaceItemDecoration(2, 16));
         }
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
@@ -91,8 +94,7 @@ public class DiscoverFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-            toolbar.setNavigationIcon(
-                ContextCompat.getDrawable(getActivity(), R.drawable.ic_round_menu_24px));
+
             //noinspection ConstantConditions
             ((AppCompatActivity) getActivity()).getSupportActionBar()
                 .setTitle(R.string.title_discover);

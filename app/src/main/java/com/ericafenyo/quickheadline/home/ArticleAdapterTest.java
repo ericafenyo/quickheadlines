@@ -26,10 +26,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.ericafenyo.data.entities.Article;
 import com.ericafenyo.quickheadline.R;
 import com.ericafenyo.quickheadline.di.GlideApp;
-import com.ericafenyo.quickheadline.model.Bookmark;
-import com.ericafenyo.quickheadline.model.News;
 import com.ericafenyo.quickheadline.utils.Moment;
 import java.util.List;
 
@@ -37,28 +36,26 @@ import java.util.List;
  * Created by eric on 07/03/2018. a simple RecyclerView adapter class
  */
 
-public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder> {
+public class ArticleAdapterTest extends RecyclerView.Adapter<ArticleAdapterTest.ArticleViewHolder> {
 
     private Context mContext;
-    private List<News.Article> mData;
+    private List<Article> mData;
     private onItemSelected mOnItemSelected;
-    private static final String LOG_TAG = ArticleAdapter.class.getName();
+    private static final String LOG_TAG = ArticleAdapterTest.class.getName();
 
-    public ArticleAdapter(Context mContext, onItemSelected mOnItemSelected) {
-        this.mContext = mContext;
+    public ArticleAdapterTest(Context context, onItemSelected mOnItemSelected) {
+        this.mContext = context;
         this.mOnItemSelected = mOnItemSelected;
     }
 
-    public void setData(List<News.Article> mData) {
+    public void setData(List<Article> mData) {
         this.mData = mData;
     }
 
     //Item click listener Interface
     public interface onItemSelected {
 
-        void onClick(int position, List<News.Article> articles);
-
-        void onLongClick(Bookmark bookmark);
+        void onClick(int position, List<Article> articles);
     }
 
     @NonNull
@@ -70,23 +67,19 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     @Override
     public void onBindViewHolder(@NonNull ArticleViewHolder holder, int position) {
-        News.Article articles = mData.get(position);
-        holder.textArticleTitle.setText(articles.getTitle());
+        Article article = mData.get(position);
+        holder.textArticleTitle.setText(article.getTitle());
 
-        String sourceName = articles.getSource().getName();
-        String source;
-        if (sourceName.indexOf('.') != -1) {
-            source = sourceName.substring(0, sourceName.indexOf('.'));
-        } else {
-            source = sourceName;
-        }
+        String articleSection = article.getSection();
 
-        holder.textArticleSource.setText(source);
-        String timeAgo = Moment.getTimeAgo(articles.getPublishedAt());
+        holder.textArticleSection.setText(articleSection);
+        String timeAgo = Moment.getTimeAgo(article.getPublishedDate());
         holder.textArticlePublishedTime.setText(timeAgo);
 
-        GlideApp.with(mContext).load(articles.getUrlToImage()).placeholder((R.color.colorGrayLight))
+        GlideApp.with(mContext).load(article.getImageUrl()).placeholder((R.color.colorGrayLight))
             .into(holder.imageArticleThumbnail);
+
+        holder.textArticleDescription.setText(article.getDescription());
     }
 
     @Override
@@ -94,46 +87,39 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         return mData == null ? 0 : mData.size();
     }
 
-    public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
-        View.OnLongClickListener {
+    public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.image_article_thumbnail) ImageView imageArticleThumbnail;
-        @BindView(R.id.text_article_source) TextView textArticleSource;
+        @BindView(R.id.text_article_source) TextView textArticleSection;
         @BindView(R.id.text_article_title) TextView textArticleTitle;
         @BindView(R.id.text_article_published_time) TextView textArticlePublishedTime;
+        @BindView(R.id.text_article_description) TextView textArticleDescription;
 
         public ArticleViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
             mOnItemSelected.onClick(getAdapterPosition(), mData);
         }
-
-        @Override
-        public boolean onLongClick(View v) {
-            mOnItemSelected.onLongClick(provideBookmark(getAdapterPosition()));
-            return true;
-        }
     }
 
-    /**
-     * @param position The adapter position of the item if it still exists in the adapter.
-     * @return an object of {@link Bookmark}
-     */
-    private Bookmark provideBookmark(int position) {
-        News.Article articles = mData.get(position);
-        return new Bookmark.Builder().setTitle(articles.getTitle())
-            .setDescription(articles.getDescription())
-            .setSource(articles.getSource().getName())
-            .setPublishedAt(articles.getPublishedAt())
-            .setAuthor(articles.getAuthor())
-            .setUrl(articles.getUrl())
-            .setUrlToImage(articles.getUrlToImage())
-            .build();
-    }
+//    /**
+//     * @param position The adapter position of the item if it still exists in the adapter.
+//     * @return an object of {@link Bookmark}
+//     */
+//    private Bookmark provideBookmark(int position) {
+//        Article articles = mData.get(position);
+//        return new Bookmark.Builder().setTitle(articles.getTitle())
+//            .setDescription(articles.getDescription())
+//            .setSource(articles.getSource().getName())
+//            .setPublishedAt(articles.getPublishedAt())
+//            .setAuthor(articles.getAuthor())
+//            .setUrl(articles.getUrl())
+//            .setUrlToImage(articles.getUrlToImage())
+//            .build();
+//    }
 }

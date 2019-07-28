@@ -18,8 +18,11 @@ package com.ericafenyo.quickheadline.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -44,7 +47,7 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity implements
     BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private static final String LOG_TAG = MainActivity.class.getName();//for debugging purpose
+    private static final String LOG_TAG = MainActivity.class.getName();
 
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
@@ -67,18 +70,10 @@ public class MainActivity extends AppCompatActivity implements
         navigation.setOnNavigationItemSelectedListener(this);
         //select first navigation menu on startup
         if (preferenceUtils.isFirstTimeChecked()) {
-            View view = navigation.findViewById(R.id.action_headlines);
+            View view = navigation.findViewById(R.id.action_top_stories);
             view.performClick();
             preferenceUtils.setFirstTimeChecked(false);
         }
-
-        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
-            Fragment fragment = getSupportFragmentManager()
-                .findFragmentById(R.id.frame_container_main);
-            if (fragment != null) {
-                updateNavMenuItem(fragment);
-            }
-        });
     }
 
     @Override
@@ -92,28 +87,45 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    boolean doubleBackToExitPressedOnce = false;
+    Toast toast = null;
+
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+
+        if (doubleBackToExitPressedOnce) {
+            toast.cancel();
             finish();
-        } else {
-            super.onBackPressed();
         }
+
+        this.doubleBackToExitPressedOnce = true;
+
+        toast = Toast.makeText(this, "Press the Back button again to exit.", Toast.LENGTH_SHORT);
+        toast.show();
+
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment;
         switch (item.getItemId()) {
-            case R.id.action_headlines:
+            case R.id.action_top_stories:
                 fragment = HomeFragment.newInstance();
                 loadFragment(fragment);
                 return true;
+
+            case R.id.action_local:
+                fragment = LocalArticleFragment.newInstance();
+                loadFragment(fragment);
+                return true;
+
             case R.id.action_explore:
                 fragment = DiscoverFragment.newInstance();
                 loadFragment(fragment);
-
                 return true;
+
             case R.id.action_favorites:
                 fragment = BookmarkFragment.newInstance();
                 loadFragment(fragment);
@@ -133,28 +145,6 @@ public class MainActivity extends AppCompatActivity implements
             transaction.replace(R.id.frame_container_main, fragment, TAG);
             transaction.addToBackStack(TAG);
             transaction.commit();
-        }
-    }
-
-    /**
-     * Sets bottomNavigationMenuItem as checked after the fragment is pop back from backStack
-     *
-     * @param fragment {@link Fragment}
-     */
-    private void updateNavMenuItem(Fragment fragment) {
-        String fragClassName = fragment.getClass().getName();
-        final int homeMenuItemIndex = 0;
-        final int discoverMenuItemIndex = 1;
-        final int bookmarkMenuItemIndex = 2;
-
-        if (fragClassName.equals(HomeFragment.class.getName())) {
-            navigation.getMenu().getItem(homeMenuItemIndex).setChecked(true);
-
-        } else if (fragClassName.equals(DiscoverFragment.class.getName())) {
-            navigation.getMenu().getItem(discoverMenuItemIndex).setChecked(true);
-
-        } else if (fragClassName.equals(BookmarkFragment.class.getName())) {
-            navigation.getMenu().getItem(bookmarkMenuItemIndex).setChecked(true);
         }
     }
 }

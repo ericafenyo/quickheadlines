@@ -37,11 +37,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
@@ -50,13 +51,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.ericafenyo.data.entities.Article;
 import com.ericafenyo.quickheadline.R;
 import com.ericafenyo.quickheadline.SettingsActivity;
 import com.ericafenyo.quickheadline.contract.ArticleEntry;
 import com.ericafenyo.quickheadline.contract.WeatherEntry;
 import com.ericafenyo.quickheadline.di.GlideApp;
 import com.ericafenyo.quickheadline.di.MyApp;
-import com.ericafenyo.quickheadline.model.Bookmark;
 import com.ericafenyo.quickheadline.model.News;
 import com.ericafenyo.quickheadline.utils.ForecastUtils;
 import com.ericafenyo.quickheadline.utils.HelperUtils;
@@ -69,12 +70,13 @@ import javax.inject.Inject;
 /**
  * A simple {@link Fragment} for displaying top article stories
  */
-public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelected {
+public class HomeFragment extends Fragment implements
+    ArticleAdapterTest.onItemSelected {
 
     private static final int ID_ARTICLE_LOADER = 250;
     private static final int ID_WEATHER_LOADER = 856;
 
-    private ArticleAdapter mAdapter;
+    private ArticleAdapterTest mAdapter;
 
     @BindView(R.id.toolbar_home)
     Toolbar toolbar;
@@ -83,7 +85,7 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
     @BindView(R.id.progress_bar_home)
     ProgressBar progressBar;
     @BindView(R.id.weather_card)
-    ConstraintLayout weatherCard;
+    CardView weatherCard;
 
     /*weather fields*/
     @BindView(R.id.tv_summary)
@@ -98,9 +100,6 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
     TextView tvUnit;
     private String unitId;
 
-    public HomeFragment() {
-        //Empty public constructor
-    }
 
     @Inject
     PreferenceUtils preferenceUtils;
@@ -125,7 +124,7 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
         ((MyApp) getActivity().getApplication()).getComponent().inject(this);
 
         unitId = preferenceUtils.getTemperatureUnitId();
-        mAdapter = new ArticleAdapter(getActivity(), this);
+        mAdapter = new ArticleAdapterTest(requireContext(), this);
 
         LoaderManager.getInstance(this).initLoader(ID_ARTICLE_LOADER, null, loaderArticle);
         LoaderManager.getInstance(this).initLoader(ID_WEATHER_LOADER, null, loaderWeather);
@@ -139,12 +138,16 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-            toolbar.setNavigationIcon(
-                ContextCompat.getDrawable(getActivity(), R.drawable.ic_round_menu_24px));
+
             //noinspection ConstantConditions
             ((AppCompatActivity) getActivity()).getSupportActionBar()
                 .setTitle(R.string.title_top_stories);
         }
+
+        HeadlineViewModel viewModel = ViewModelProviders.of(this).get(HeadlineViewModel.class);
+        viewModel.getArticle().observe(this, articles -> {
+            populateRecyclerView(articles);
+        });
     }
 
     @Override
@@ -184,23 +187,18 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
 
     ////////// ArticleAdapter#onItemSelected Implementations ////////////////////
 
-    @Override
-    public void onClick(int position, List<News.Article> articles) {
-        String fragTAG = ArticlePagerFragment.class.getName();
-        Fragment fragment = ArticlePagerFragment.newInstance(articles, position);
-        getFragmentManager()
-            .beginTransaction()
-            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                R.anim.enter_from_left, R.anim.exit_to_right)
-            .replace(R.id.frame_container_main, fragment, fragment.getTag())
-            .addToBackStack(fragTAG)
-            .commit();
-    }
-
-    @Override
-    public void onLongClick(Bookmark bookmark) {
-
-    }
+//    @Override
+//    public void onClick(int position, List<News.Article> articles) {
+//        String fragTAG = ArticlePagerFragment.class.getName();
+//        Fragment fragment = ArticlePagerFragment.newInstance(articles, position);
+//        getFragmentManager()
+//            .beginTransaction()
+//            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+//                R.anim.enter_from_left, R.anim.exit_to_right)
+//            .replace(R.id.frame_container_main, fragment, fragment.getTag())
+//            .addToBackStack(fragTAG)
+//            .commit();
+//    }
 
     ////////// Article CursorLoader Callbacks ////////////////////
 
@@ -273,8 +271,9 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
                 articles.add(new News.Article(new News.Source(source), author, title,
                     description, url, urlToImage, publishedDate));
 
-                populateRecyclerView(articles);
             }
+
+//            populateRecyclerView(articles);
 
         }
 
@@ -397,7 +396,7 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
         }
     }
 
-    private void populateRecyclerView(List<News.Article> data) {
+    private void populateRecyclerView(List<Article> data) {
         if (data != null) {
             mAdapter.setData(data);
             if (HelperUtils.isLandscapeMode(getActivity())) {
@@ -414,6 +413,12 @@ public class HomeFragment extends Fragment implements ArticleAdapter.onItemSelec
             return;
         }
     }
+
+    @Override
+    public void onClick(int position, List<Article> articles) {
+
+    }
+
 
     /**
      * launch a detailed view for the weather information

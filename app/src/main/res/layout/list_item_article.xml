@@ -14,77 +14,115 @@
   limitations under the License.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@color/colorWhite">
+  android:layout_marginBottom="16dp"
+  android:layout_marginStart="@dimen/margin_padding_small"
+  android:layout_marginEnd="@dimen/margin_padding_small"
+  app:cardCornerRadius="5dp"
+  app:cardElevation="1dp">
 
-  <TextView
-    android:id="@+id/text_article_source"
-    style="@style/TextAppearance.Overline"
-    android:layout_width="wrap_content"
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="24dp"
-    android:layout_marginStart="@dimen/activity_horizontal_margin"
-    android:contentDescription="@string/accessibility_source"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:text="@tools:sample/full_names"/>
+    android:background="@color/colorWhite">
 
-  <TextView
-    android:id="@+id/text_article_title"
-    style="@style/TextAppearance.Subtitle1"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginStart="@dimen/activity_horizontal_margin"
-    android:layout_marginEnd="16dp"
-    android:contentDescription="@string/accessibility_title"
-    android:ellipsize="end"
-    android:maxLines="2"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@+id/image_article_thumbnail"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/text_article_source"
-    app:layout_constraintVertical_bias="0.0"
-    tools:text="Paris attacker identified as Chechen-born French citizen"/>
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/text_article_source"
+      style="@style/TextAppearance.Overline"
+      android:textStyle="normal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:contentDescription="@string/accessibility_source"
+      android:fontFamily="sans-serif-medium"
+      android:lineSpacingExtra="4sp"
+      android:textColor="@color/ColorHighEmphasisDark"
+      app:layout_constraintBottom_toBottomOf="@+id/text_article_published_time"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/text_article_published_time"
+      tools:text="Science"/>
 
-  <ImageView
-    android:id="@+id/image_article_thumbnail"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-    android:contentDescription="@string/accessibility_thumbnail"
-    android:scaleType="centerCrop"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/text_article_published_time"
-    tools:src="@drawable/business"/>
+    <ImageView
+      android:id="@+id/button_more"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/image_article_thumbnail"
+      app:srcCompat="@drawable/ic_baseline_more_horiz_24px"/>
 
-  <TextView
-    android:id="@+id/text_article_published_time"
-    style="@style/TextAppearance.Overline"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
-    android:contentDescription="@string/accessibility_description"
-    app:layout_constraintEnd_toStartOf="@+id/image_article_thumbnail"
-    app:layout_constraintTop_toTopOf="@+id/text_article_source"
-    tools:text="@tools:sample/date/mmddyy"/>
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/text_article_title"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/margin_padding_small"
+      android:layout_marginStart="@dimen/activity_horizontal_margin"
+      android:layout_marginEnd="@dimen/activity_horizontal_margin"
+      android:contentDescription="@string/accessibility_title"
+      android:fontFamily="@font/lato_semibold"
+      android:textColor="#1d1f24"
+      android:textSize="24sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/text_article_source"
+      tools:text="Messages on the Moon From a World Turned Upside Down"/>
 
-  <View
-    android:id="@+id/divider"
-    android:layout_width="wrap_content"
-    android:layout_height="8dp"
-    android:layout_marginTop="24dp"
-    android:background="@drawable/list_divider"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/text_article_title"/>
+    <ImageView
+      android:id="@+id/image_article_thumbnail"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginTop="4dp"
+      android:layout_marginBottom="20dp"
+      android:layout_marginStart="@dimen/margin_padding_small"
+      android:layout_marginEnd="@dimen/margin_padding_small"
+      android:contentDescription="@string/accessibility_thumbnail"
+      android:scaleType="centerCrop"
+      app:layout_constraintBottom_toTopOf="@+id/text_article_source"
+      app:layout_constraintDimensionRatio="3:2"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:src="@drawable/business"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+      android:id="@+id/text_article_published_time"
+      android:textStyle="normal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:contentDescription="@string/accessibility_description"
+      android:fontFamily="sans-serif-medium"
+      android:gravity="end"
+      android:lineSpacingExtra="4sp"
+      android:textColor="@color/ColorDisabledDark"
+      android:textSize="12sp"
+      app:layout_constraintBottom_toBottomOf="@+id/button_more"
+      app:layout_constraintEnd_toStartOf="@+id/button_more"
+      app:layout_constraintTop_toTopOf="@+id/button_more"
+      tools:text="11 hours ago"/>
+
+    <TextView
+      android:id="@+id/text_article_description"
+      style="@style/TextAppearance.Body1"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:layout_marginBottom="@dimen/activity_horizontal_margin"
+      android:layout_marginStart="@dimen/activity_horizontal_margin"
+      android:layout_marginEnd="@dimen/activity_horizontal_margin"
+      android:contentDescription="@string/accessibility_description"
+      android:lineSpacingExtra="6sp"
+      android:textColor="#1d1f24"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/text_article_title"
+      tools:text="Our journey to the moon took us a long way from Earth, but it was always tangled up with power politics here on the ground."/>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

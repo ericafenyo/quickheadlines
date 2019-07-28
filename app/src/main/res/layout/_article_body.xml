@@ -63,20 +63,22 @@
     app:layout_constraintStart_toEndOf="@+id/tv_detail_article_source"
     app:layout_constraintTop_toTopOf="parent"/>
 
-  <TextView
+  <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/tv_detail_article_title"
+    style="@style/TextAppearance.Headline4"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/activity_horizontal_margin"
     android:layout_marginEnd="@dimen/activity_horizontal_margin"
     android:contentDescription="@string/accessibility_title"
-    style="@style/TextAppearance.Headline4"
+    android:fontFamily="@font/lato_semibold"
+    android:textColor="#1d1f24"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/tv_detail_article_source"
     tools:text="@sample/articles.json/articles/title"/>
 
-  <TextView
+  <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/tv_detail_article_description"
     style="@style/TextAppearance.Body1"
     android:layout_width="0dp"
@@ -85,6 +87,8 @@
     android:layout_marginStart="@dimen/activity_horizontal_margin"
     android:layout_marginEnd="@dimen/activity_horizontal_margin"
     android:contentDescription="@string/accessibility_description"
+    android:lineSpacingExtra="6sp"
+    android:textColor="#1d1f24"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/tv_detail_article_title"
