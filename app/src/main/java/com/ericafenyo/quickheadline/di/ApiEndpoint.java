@@ -33,7 +33,7 @@ import retrofit2.http.Query;
 
 public interface ApiEndpoint {
 
-    ////////// Weather ApiEndpoint ////////////////////
+    // Weather ApiEndpoint
     @GET("/forecast/{apiKey}/{lat},{lng}")
     Call<Weather> getWeather(@Path("apiKey") String apiKey,
                              @Path("lat") String lat,
@@ -41,19 +41,19 @@ public interface ApiEndpoint {
                              @Query("exclude") String exclude,
                              @Query("lang") String lang);
 
-    ////////// GeoNames ApiEndpoint ////////////////////
+    //GeoNames ApiEndpoint
     @GET("countryCodeJSON")
     Call<Country> getCountry(@Query("lat") String lat,
                              @Query("lng") String lng,
                              @Query("username") String username);
 
-    ////////// News ApiEndpoint ////////////////////
+    // News ApiEndpoint
     @GET("top-headlines")
     Call<News> getArticle(@Query("country") String country,
                           @Query("pageSize") int pageSize,
                           @Query("apiKey") String apiKey);
 
-    ////////// News Category ApiEndpoint ////////////////////
+    // News Category ApiEndpoint
     @GET("top-headlines")
     Call<News> getCategory(@Query("category") String category,
                            @Query("country") String country,
@@ -61,7 +61,7 @@ public interface ApiEndpoint {
                            @Query("apiKey") String apiKey);
 
 
-    ////////// News Search ApiEndpoint ////////////////////
+    // News Search ApiEndpoint
     @GET("everything")
     Call<News> getSearchRepose(@Query("q") String param,
                                @Query("pageSize") int pageSize,

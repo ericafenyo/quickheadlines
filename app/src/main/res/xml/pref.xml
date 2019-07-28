@@ -57,9 +57,9 @@
             android:summary="@string/pref_summary_licenses"
             android:title="@string/pref_title_licenses">
             <intent
-                android:action="com.example.eric.quickheadline.LAUNCH_PREF"
-                android:targetClass="com.example.eric.quickheadline.LicenseActivity"
-                android:targetPackage="com.example.eric.quickheadline" />
+                android:action="com.ericafenyo.quickheadline.LAUNCH_PREF"
+                android:targetClass="com.ericafenyo.quickheadline.LicenseActivity"
+                android:targetPackage="com.ericafenyo.quickheadline" />
         </Preference>
         <Preference
             android:selectable="false"

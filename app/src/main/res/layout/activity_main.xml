@@ -35,6 +35,5 @@
     android:background="@color/colorWhite"
     app:itemIconTint="@drawable/nav_selector_icon"
     app:itemTextColor="@drawable/nav_selector_text"
-    app:labelVisibilityMode="labeled"
     app:menu="@menu/navigation"/>
 </LinearLayout>

@@ -13,20 +13,20 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:layout_marginTop="@dimen/margin_padding_small"
   android:layout_marginBottom="@dimen/margin_padding_small"
   android:layout_marginStart="@dimen/margin_padding_normal"
   android:layout_marginEnd="@dimen/margin_padding_normal"
-  android:theme="@style/Widget.MaterialComponents.CardView"
   app:cardBackgroundColor="@color/colorWhite"
   app:cardElevation="@dimen/size_view_divider">
 
   <LinearLayout
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linear_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -36,33 +36,37 @@
       android:id="@+id/iv_bookmark_article_thumbnail"
       android:layout_width="match_parent"
       android:layout_height="@dimen/size_bookmark_image"
-      android:layout_marginTop="@dimen/margin_padding_normal"
-      android:layout_marginStart="@dimen/margin_padding_normal"
-      android:layout_marginEnd="@dimen/activity_horizontal_margin"
+      android:layout_marginTop="@dimen/margin_padding_small"
+      android:layout_marginStart="@dimen/margin_padding_small"
+      android:layout_marginEnd="@dimen/margin_padding_small"
       android:contentDescription="@string/accessibility_thumbnail"
       android:scaleType="centerCrop"
-      tools:src="@tools:sample/avatars"/>
+      tools:src="@drawable/business"/>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/tv_bookmark_article_title"
-      style="@style/TextAppearance.Headline6"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/activity_horizontal_margin"
       android:layout_marginTop="@dimen/margin_padding_xsmall"
       android:layout_marginStart="@dimen/activity_horizontal_margin"
       android:contentDescription="@string/accessibility_title"
-      tools:text="@sample/articles.json/articles/title"/>
+      android:fontFamily="@font/lato_semibold"
+      android:textColor="#1d1f24"
+      android:textSize="24sp"
+      tools:text="Messages on the Moon From a World Turned Upside Down"/>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/tv_bookmark_article_description"
       style="@style/TextAppearance.Body1"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:textColor="#1d1f24"
       android:layout_marginStart="@dimen/activity_horizontal_margin"
       android:layout_marginEnd="@dimen/activity_horizontal_margin"
       android:contentDescription="@string/accessibility_description"
-      android:textColor="@color/colorArticleTitle"/>
+      android:lineSpacingExtra="6sp"
+      tools:text="Our journey to the moon took us a long way from Earth, but it was always tangled up with power politics here on the ground."/>
 
     <TextView
       android:id="@+id/tv_bookmark_article_publish_date"

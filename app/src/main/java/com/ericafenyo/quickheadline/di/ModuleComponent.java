@@ -20,6 +20,7 @@ import android.content.SharedPreferences;
 
 import com.ericafenyo.quickheadline.home.ArticleDetailFragment;
 import com.ericafenyo.quickheadline.discover.CategoryActivity;
+import com.ericafenyo.quickheadline.home.LocalArticleFragment;
 import com.ericafenyo.quickheadline.home.MainActivity;
 import com.ericafenyo.quickheadline.SplashActivity;
 import com.ericafenyo.quickheadline.WelcomeActivity;
@@ -77,5 +78,6 @@ public interface ModuleComponent {
     ApiEndpoint getWeatherEndpoint();
 
 
+    void inject(LocalArticleFragment localArticleFragment);
 }
 
