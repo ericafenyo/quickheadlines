@@ -1,1 +1,1 @@
-include ':app',':repository', ':data'
+include ':app',':repository', ':data', ':localstore'
