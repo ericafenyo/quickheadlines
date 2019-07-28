@@ -26,7 +26,7 @@ import kotlin.coroutines.CoroutineContext
 
 open class ScopedViewModel : ViewModel(), CoroutineScope {
 
-    val job = Job()
+    private val job = Job()
     val context = job + Dispatchers.Main
 
     override val coroutineContext: CoroutineContext
