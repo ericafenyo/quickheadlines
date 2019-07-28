@@ -22,6 +22,9 @@
     <meta-data
       android:name="com.google.android.geo.API_KEY"
       android:value="${placeApiKey}"/>
+    <meta-data
+      android:name="preloaded_fonts"
+      android:resource="@array/preloaded_fonts"/>
 
     <!-- SplashActivity -->
     <activity
@@ -44,6 +47,9 @@
 
       <!-- meta tag and intent filter go into results activity -->
     </activity>
+
+    <!-- License Activity -->
+    <activity android:name="com.ericafenyo.quickheadline.LicenseActivity"/>
     <!-- WebActivity -->
     <activity android:name="com.ericafenyo.quickheadline.home.WebActivity"/>
 
@@ -101,7 +107,6 @@
 
     <activity android:name="com.ericafenyo.quickheadline.discover.CategoryActivity"/>
     <activity android:name="com.ericafenyo.quickheadline.SettingsActivity"/>
-    <activity android:name="com.ericafenyo.quickheadline.LicenseActivity"/>
     <activity android:name="com.ericafenyo.quickheadline.home.WeatherDetailActivity"/>
     <activity android:name="com.ericafenyo.quickheadline.MapsActivity"/>
 
