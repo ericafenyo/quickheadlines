@@ -12,10 +12,11 @@ public class Moment {
 
     private static final String LOG_TAG = Moment.class.getName();
 
-    private static final String TIME_UNIT_SECONDS = "S";
-    private static final String TIME_UNIT_MINUTES = "M";
-    private static final String TIME_UNIT_HOURS = "H";
-    private static final String TIME_UNIT_DAYS = "D";
+    private static final String TIME_UNIT_SECONDS = "sec ago";
+    private static final String TIME_UNIT_MINUTES = "min ago";
+    private static final String TIME_UNIT_HOURS = "h ago";
+    private static final String TIME_UNIT_DAYS = "d ago";
+
 
     /**
      * Typical MySqL/SQL dateTime format with dash as separator
