@@ -7,29 +7,28 @@ import retrofit2.http.Query
 
 interface ArticleService {
     /**
-     * Get the basic movie information for a specific movie id.
+     * Returns an array of articles currently on the specified section.
      *
-     * @param movieId          A Movie TMDb id.
-     * @param language         *Optional.* ISO 639-1 code.
-     * @param appendToResponse *Optional.* extra requests to append to the result. **Accepted Value(s):** alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     * @param section The section the story appears in. Allow values:
+     * arts, automobiles, books, business, fashion, food, health, home,
+     * insider, magazine, movies, national, nyregion, obituaries, opinion,
+     * politics, realestate, science, sports, sundayreview, technology,
+     * theater, tmagazine, travel, upshot, world.
+     *
+     * @return A [Deferred] of [ArticleService].
      */
-    @GET("movie/{movie_id}")
+    @GET("{section}.json")
     fun fetchTopStories(
-        @Path("movie_id") movieId: Int,
-        @Query("language") language: String
+        @Path("section") section: String
     ): Deferred<ArticleResponse>
 
 
     /**
-     * Get the basic movie information for a specific movie id.
      *
-     * @param movieId          A Movie TMDb id.
-     * @param language         *Optional.* ISO 639-1 code.
-     * @param appendToResponse *Optional.* extra requests to append to the result. **Accepted Value(s):** alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
      */
-    @GET("movie/{movie_id}")
+    @GET("articlesearch.json")
     fun search(
-        @Path("movie_id") movieId: Int,
-        @Query("language") language: String
+        @Query("q") query: String,
+        @Query("fq") filter: String
     ): Deferred<ArticleResponse>
 }
