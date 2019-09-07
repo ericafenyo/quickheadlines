@@ -1,4 +1,4 @@
-package com.ericafenyo.data.source
+package com.ericafenyo.data.article.source
 
 
 import com.google.gson.annotations.SerializedName
@@ -11,7 +11,7 @@ data class ArticleDTO(
     @SerializedName("num_results")
     val numResults: Int,
     @SerializedName("results")
-    val results: List<Result>,
+    val articles: List<Result>,
     @SerializedName("section")
     val section: String,
     @SerializedName("status")

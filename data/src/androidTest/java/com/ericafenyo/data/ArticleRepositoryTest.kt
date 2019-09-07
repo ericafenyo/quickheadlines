@@ -22,6 +22,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.ericafenyo.data.article.ArticleRepository
+import com.ericafenyo.data.article.ArticleRepositoryImpl
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -45,20 +46,12 @@ class ArticleRepositoryTest {
     // This is needed to create the room database.
     val context = InstrumentationRegistry.getInstrumentation().targetContext
 
-//    val database = Room.inMemoryDatabaseBuilder(context, PedometerDatabase::class.java).build()
-//    stepDao = database.stepDao()
-//
-//    //initialize objects
-//    repository = StepRepositoryImpl(stepDao)
-
-    //TODO: Get reference to the ArticleDao
-
     //initialize objects
-    repository = StepRepositoryImpl(stepDao)
+    repository = ArticleRepositoryImpl()
   }
 
   @Test
   fun shouldPass() {
-    assert(true);
+    assert(true)
   }
 }

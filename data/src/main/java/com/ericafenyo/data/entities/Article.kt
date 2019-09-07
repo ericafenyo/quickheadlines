@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ericafenyo.data.article.entities
+package com.ericafenyo.data.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

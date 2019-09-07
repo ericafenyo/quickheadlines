@@ -1,4 +1,4 @@
-package com.ericafenyo.data.source
+package com.ericafenyo.data.article.source
 
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
