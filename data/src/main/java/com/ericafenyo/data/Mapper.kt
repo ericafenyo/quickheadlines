@@ -15,36 +15,25 @@
  */
 
 
-package com.ericafenyo.repository
+package com.ericafenyo.data
 
-import com.ericafenyo.data.news.ArticleDTO
-import com.ericafenyo.data.news.LocalArticleDTO
-import com.ericafenyo.entities.Article
+import com.ericafenyo.data.article.source.ArticleDTO
+import com.ericafenyo.data.entities.Article
 
-fun toLocalArticle(value: LocalArticleDTO.Result) = with(value) {
-  println(value)
-  Article(
-      imageUrl = urlToImage ?: "",
-      articleUrl = url ?: "",
-      author = author ?: "",
-      description = description ?: "",
-      publishedDate = publishedAt?: "",
-      section = source.name,
-      title = title ?: ""
-  )
+class Mapper {
+    fun toArticle(value: ArticleDTO.Result) = with(value) {
+        Article(
+            imageUrl = multimedia.first().url,
+            articleUrl = shortUrl,
+            author = byline,
+            description = abstract,
+            publishedDate = publishedDate,
+            section = section,
+            title = title
+        )
+    }
 }
 
-fun toArticle(value: ArticleDTO.Result) = with(value) {
-  Article(
-      imageUrl = multimedia.first().url,
-      articleUrl = shortUrl,
-      author = byline,
-      description = abstract,
-      publishedDate = publishedDate,
-      section = section,
-      title = title
-  )
-}
 
 
 

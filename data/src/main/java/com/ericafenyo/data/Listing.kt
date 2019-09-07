@@ -2,5 +2,6 @@
 
 package com.ericafenyo.data
 
-class Listing {
-}
+import androidx.lifecycle.LiveData
+
+data class Listing<T>(val data: LiveData<T>, val networkState: LiveData<NetworkState>)
