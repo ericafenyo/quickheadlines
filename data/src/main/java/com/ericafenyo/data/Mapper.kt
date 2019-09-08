@@ -21,17 +21,26 @@ import com.ericafenyo.data.article.source.ArticleDTO
 import com.ericafenyo.data.entities.Article
 
 class Mapper {
-    fun toArticle(value: ArticleDTO.Result) = with(value) {
-        Article(
-            imageUrl = multimedia.first().url,
-            articleUrl = shortUrl,
-            author = byline,
-            description = abstract,
-            publishedDate = publishedDate,
-            section = section,
-            title = title
-        )
+  fun toArticle(value: ArticleDTO.Result) = with(value) {
+    println(value)
+    Article(
+      imageUrl = parseMedia(multimedia),
+      articleUrl = url,
+      author = byline ?: "",
+      description = abstract ?: url,
+      publishedDate = publishedDate ?: "",
+      section = section ?: "",
+      title = title ?: ""
+    )
+  }
+
+  private fun parseMedia(multimedia: List<ArticleDTO.Result.Multimedia>?): String {
+    if (multimedia.isNullOrEmpty()) {
+      return ""
     }
+
+    return multimedia.last().url
+  }
 }
 
 

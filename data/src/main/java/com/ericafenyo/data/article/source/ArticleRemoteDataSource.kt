@@ -16,9 +16,8 @@
 
 package com.ericafenyo.data.article.source
 
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import com.ericafenyo.data.Mapper
-import com.ericafenyo.data.NetworkState
 import com.ericafenyo.data.Result
 import com.ericafenyo.data.entities.Article
 import kotlinx.coroutines.delay
@@ -60,11 +59,9 @@ class ArticleRemoteDataSourceImlp constructor(
   ArticleRemoteDataSource {
   private val LOG_TAG = ArticleRemoteDataSource::class.java.name
 
-  private val networkState = MutableLiveData<NetworkState>()
 
   override suspend fun fetchTopStories(section: Section): Result<List<Article>> {
     // Start with a loading state.
-    networkState.postValue(NetworkState.LOADING)
     return try {
 
       val articles = service.fetchTopStories(section.name)
@@ -73,6 +70,7 @@ class ArticleRemoteDataSourceImlp constructor(
         .map(mapper::toArticle)
       Result.Success(articles)
     } catch (exception: Exception) {
+      Log.w(LOG_TAG, exception)
       return when (exception) {
         // Error from server
         is HttpException -> return Result.Error("Server error")
