@@ -23,11 +23,18 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.ericafenyo.data.article.ArticleRepository
 import com.ericafenyo.data.article.ArticleRepositoryImpl
+import com.ericafenyo.data.article.source.ArticleRemoteDataSourceImlp
+import com.ericafenyo.data.article.source.Section
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.withContext
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class ArticleRepositoryTest {
 
@@ -35,23 +42,48 @@ class ArticleRepositoryTest {
   // Make all live data calls sync
   val instantExecutor = InstantTaskExecutorRule()
 
+//  @Mock
+//  lateinit var remoteDataSource: ArticleRemoteDataSource
+
   // Get a reference to the class under test.
   private lateinit var repository: ArticleRepository
 
   // private lateinit var articleDao: ArticleDao
 
+  private val testScope = TestCoroutineScope()
+
   @Before
   fun setUp() {
-    //Get a reference to a context object
+    // Bind mocks to this class.
+//    MockitoAnnotations.initMocks(this)
+
+    // Get a reference to a context object
     // This is needed to create the room database.
     val context = InstrumentationRegistry.getInstrumentation().targetContext
 
     //initialize objects
-    repository = ArticleRepositoryImpl()
+
   }
+
+
+  @Test
+  fun getArticles(): Unit = runBlocking {
+
+    val articleService = News().getArticleService(env.NEWS_API_KEY)
+
+    val dataSource = ArticleRemoteDataSourceImlp(articleService, Mapper())
+
+    repository = ArticleRepositoryImpl(dataSource)
+
+    val articles = withContext(testScope.coroutineContext) {
+      repository.getArticles(Section.business)
+    }
+  }
+
 
   @Test
   fun shouldPass() {
+    println("Articles")
     assert(true)
   }
 }
