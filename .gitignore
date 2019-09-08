@@ -63,3 +63,5 @@ google-services.json
 # Version control
 vcs.xml
 app/sampledata/
+env.kt
+env.gradle
