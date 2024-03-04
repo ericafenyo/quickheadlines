@@ -1,0 +1,60 @@
+[versions]
+# Android build configs
+# Android 13
+compileSdk = "34"
+# Android 6
+minSdk = "23"
+
+kotlin = "1.9.22"
+retrofit = "2.9.0"
+hilt = "2.50"
+room = "2.6.1"
+lifecycle = "2.7.0"
+navigation = "2.7.7"
+
+[libraries]
+# Gradle plugins to be injected into gradle class paths
+kotlin-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+android-build-tool-plugin = "com.android.tools.build:gradle:8.2.2"
+dagger-hilt-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
+
+#Others
+desugarJdk8 = "com.android.tools:desugar_jdk_libs:2.0.4"
+
+coil = "io.coil-kt:coil:2.5.0"
+
+gson = "com.google.code.gson:gson:2.10.1"
+
+retrofit2-gsonConverter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+
+androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+
+androidx-activity = "androidx.activity:activity-ktx:1.8.2"
+androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
+androidx-browser = "androidx.browser:browser:1.7.0"
+androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
+androidx-core = "androidx.core:core-ktx:1.12.0"
+androidx-splashscreen = "androidx.core:core-splashscreen:1.0.1"
+androidx-fragment = "androidx.fragment:fragment-ktx:1.6.2"
+androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
+androidx-material = "com.google.android.material:material:1.11.0"
+androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+androidx-preference = "androidx.preference:preference-ktx:1.2.1"
+databinding = "com.github.wada811:DataBinding-ktx:6.0.0"
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
+
+leakCanary = "com.squareup.leakcanary:leakcanary-android:2.8.1"
+
+mockk = "io.mockk:mockk:1.13.9"
+
+timber = "com.jakewharton.timber:timber:5.0.1"

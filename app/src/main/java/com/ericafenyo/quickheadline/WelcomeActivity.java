@@ -23,10 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.ericafenyo.quickheadline.di.ApiEndpoint;
-import com.ericafenyo.quickheadline.di.MyApp;
 import com.ericafenyo.quickheadline.home.MainActivity;
 import com.ericafenyo.quickheadline.model.Country;
 import com.ericafenyo.quickheadline.model.News;
@@ -34,10 +32,6 @@ import com.ericafenyo.quickheadline.utils.HelperUtils;
 import com.ericafenyo.quickheadline.utils.JsonUtils;
 import com.ericafenyo.quickheadline.utils.PreferenceUtils;
 import com.ericafenyo.quickheadline.utils.StringUtils;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -46,8 +40,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,178 +51,174 @@ import static com.ericafenyo.quickheadline.utils.ConstantFields.QUERY_PARAMS_USE
  * this class handles the place picker api and store the responses in a local file
  */
 public class WelcomeActivity extends AppCompatActivity {
-    private static final String LOG_TAG = WelcomeActivity.class.getName();//for debugging purpose
-    private static int PLACE_PICKER_REQUEST = 1;
 
-    @BindView(R.id.tv_terms)
-    TextView tvTerms;
+  private static final String LOG_TAG = "WelcomeActivity";
 
-    @Inject
-    PreferenceUtils preferenceUtils;
+  @Inject
+  PreferenceUtils preferenceUtils;
 
-    @Inject
-    @Named("geonames")
-    ApiEndpoint geoNamesEndpoint;
+  @Inject
+  @Named("geonames")
+  ApiEndpoint geoNamesEndpoint;
 
-    @Named("article")
-    @Inject
-    ApiEndpoint endpoint;
+  @Named("article")
+  @Inject
+  ApiEndpoint endpoint;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
-        ButterKnife.bind(this);
-        ((MyApp) getApplication()).getComponent().inject(this);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_welcome);
 
-        Log.v(LOG_TAG, "WelcomeActivity");
-        //makes links within TextViews clickable
-        tvTerms.setMovementMethod(LinkMovementMethod.getInstance());
-    }
+    tvTerms.setMovementMethod(LinkMovementMethod.getInstance());
+  }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+  @Override
+  public void onBackPressed() {
+    super.onBackPressed();
 
-    }
+  }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PLACE_PICKER_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                Place place = PlacePicker.getPlace(this, data);
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == PLACE_PICKER_REQUEST) {
+      if (resultCode == RESULT_OK) {
+        Place place = PlacePicker.getPlace(this, data);
 
-                String lat = StringUtils.getLat(place.getLatLng().toString());
-                String lng = StringUtils.getLng(place.getLatLng().toString());
+        String lat = StringUtils.getLat(place.getLatLng().toString());
+        String lng = StringUtils.getLng(place.getLatLng().toString());
 
-                geoNamesEndpoint.getCountry(lat, lng, QUERY_PARAMS_USER_NAME).enqueue(new Callback<Country>() {
-                    @Override
-                    public void onResponse(Call<Country> call, Response<Country> response) {
-                        if (response.body() != null) {
-                            Country data = response.body();
-                            Gson gson = new Gson();
-                            //retrieves json objects
-                            String countryCode = data.getCountryCode();
-                            String languages = StringUtils.getLanguage(data.getLanguages());
-                            String countryName = data.getCountryName();
+        geoNamesEndpoint.getCountry(lat, lng, QUERY_PARAMS_USER_NAME)
+            .enqueue(new Callback<Country>() {
+              @Override
+              public void onResponse(Call<Country> call, Response<Country> response) {
+                if (response.body() != null) {
+                  Country data = response.body();
+                  Gson gson = new Gson();
+                  //retrieves json objects
+                  String countryCode = data.getCountryCode();
+                  String languages = StringUtils.getLanguage(data.getLanguages());
+                  String countryName = data.getCountryName();
 //                            Log.v("LOG_TAG", String.valueOf(place.getAddress()));//for debugging purpose
 //                            Log.v("LOG_TAG", String.valueOf(place.getLocale()));//for debugging purpose
 //                            Log.v("LOG_TAG", String.valueOf(place.getName()));//for debugging purpose
 
-                            /* store objects in array to be saved to file
-                            * [
-                            * 0 : "lat",
-                            * 1 : "lng",
-                            * 2 : "countryCode",
-                            * 3 : "languages",
-                            * 4 : "countryName"
-                            * ]
-                            * */
-                            String[] arr = {lat, lng, countryCode, languages, countryName};
-                            String stringArr = gson.toJson(arr);
-                            try {
-                                JsonUtils.writeFile(WelcomeActivity.this, FILE_IO_NAME, stringArr);
-                                performCountrySupportVerification(countryCode, countryName);
-                            } catch (IOException e) {
-                                Log.e(LOG_TAG, "Failed to write data " + e);
-                            }
-
-                        } else {
-                            Log.e(LOG_TAG, "response is null");
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Country> call, Throwable t) {
-                        Log.e(LOG_TAG, "Failed to load geoName data " + t);
-                    }
-                });
-            }
-        }
-    }
-
-
-    /**
-     * called on click of the Continue button
-     *
-     * @param view view
-     */
-    public void onContinue(View view) {
-
-        if (HelperUtils.hasInternetConnectivity(this)) {
-            launchPlacePicker();
-        } else {
-            HelperUtils.toast(getApplicationContext(),getString(R.string.error_no_internet));
-        }
-    }
-
-    ////////// Inner Methods ////////////////////
-
-    /**
-     * launches the built-in place picker widget
-     */
-    private void launchPlacePicker() {
-        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-        try {
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void launchHomeScreen() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    /**
-     * verify if the country is supported before loading the full data
-     * we make a call to the API end point which returns one json object
-     * if it has been successful we proceed to launching the home screen and load full data
-     */
-    private void performCountrySupportVerification(String countryCode, String countryName) {
-
-        int numberOfResults = 1;
-        endpoint.getArticle(countryCode, numberOfResults, BuildConfig.NEWS_API_KEY).enqueue(new retrofit2.Callback<News>() {
-
-            @Override
-            public void onResponse(@NonNull Call<News> call, @NonNull Response<News> response) {
-                List<News.Article> articles;
-
-                if (response.body() != null) {
-                    articles = response.body().getArticles();
-                    if (articles.size() == 0) {
-                        onEmpty(countryName);
-                    } else {
-                        onSuccess();
-                        Log.e(LOG_TAG, articles.toString());
-                    }
+                  /* store objects in array to be saved to file
+                   * [
+                   * 0 : "lat",
+                   * 1 : "lng",
+                   * 2 : "countryCode",
+                   * 3 : "languages",
+                   * 4 : "countryName"
+                   * ]
+                   * */
+                  String[] arr = {lat, lng, countryCode, languages, countryName};
+                  String stringArr = gson.toJson(arr);
+                  try {
+                    JsonUtils.writeFile(WelcomeActivity.this, FILE_IO_NAME, stringArr);
+                    performCountrySupportVerification(countryCode, countryName);
+                  } catch (IOException e) {
+                    Log.e(LOG_TAG, "Failed to write data " + e);
+                  }
 
                 } else {
-                    Log.e(LOG_TAG, "response is null");
+                  Log.e(LOG_TAG, "response is null");
                 }
-            }
+              }
 
-            @Override
-            public void onFailure(Call<News> call, Throwable t) {
-                Log.e(LOG_TAG, getString(R.string.error_on_network_call) + t);
+              @Override
+              public void onFailure(Call<Country> call, Throwable t) {
+                Log.e(LOG_TAG, "Failed to load geoName data " + t);
+              }
+            });
+      }
+    }
+  }
+
+
+  /**
+   * called on click of the Continue button
+   *
+   * @param view view
+   */
+  public void onContinue(View view) {
+
+    if (HelperUtils.hasInternetConnectivity(this)) {
+      launchPlacePicker();
+    } else {
+      HelperUtils.toast(getApplicationContext(), getString(R.string.error_no_internet));
+    }
+  }
+
+  ////////// Inner Methods ////////////////////
+
+  /**
+   * launches the built-in place picker widget
+   */
+  private void launchPlacePicker() {
+    PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+    try {
+      startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+    } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void launchHomeScreen() {
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
+    finish();
+  }
+
+  /**
+   * verify if the country is supported before loading the full data we make a call to the API end
+   * point which returns one json object if it has been successful we proceed to launching the home
+   * screen and load full data
+   */
+  private void performCountrySupportVerification(String countryCode, String countryName) {
+
+    int numberOfResults = 1;
+    endpoint.getArticle(countryCode, numberOfResults, BuildConfig.NEWS_API_KEY)
+        .enqueue(new retrofit2.Callback<News>() {
+
+          @Override
+          public void onResponse(@NonNull Call<News> call, @NonNull Response<News> response) {
+            List<News.Article> articles;
+
+            if (response.body() != null) {
+              articles = response.body().getArticles();
+              if (articles.size() == 0) {
+                onEmpty(countryName);
+              } else {
+                onSuccess();
+                Log.e(LOG_TAG, articles.toString());
+              }
+
+            } else {
+              Log.e(LOG_TAG, "response is null");
             }
+          }
+
+          @Override
+          public void onFailure(Call<News> call, Throwable t) {
+            Log.e(LOG_TAG, getString(R.string.error_on_network_call) + t);
+          }
         });
-    }
+  }
 
 
-    private void onSuccess() {
-        preferenceUtils.setFirstTimeLaunch(false);
-        launchHomeScreen();
-        Log.v(LOG_TAG, "onSuccess()");
-    }
+  private void onSuccess() {
+    preferenceUtils.setFirstTimeLaunch(false);
+    launchHomeScreen();
+    Log.v(LOG_TAG, "onSuccess()");
+  }
 
-    private void onEmpty(String location) {
-        launchPlacePicker();
-        Log.v(LOG_TAG, "onEmpty()");
-        HelperUtils.toast(getApplicationContext(), getString(R.string.format_country_not_supported,location));
-    }
+  private void onEmpty(String location) {
+    launchPlacePicker();
+    Log.v(LOG_TAG, "onEmpty()");
+    HelperUtils.toast(getApplicationContext(),
+        getString(R.string.format_country_not_supported, location));
+  }
 }
 
 

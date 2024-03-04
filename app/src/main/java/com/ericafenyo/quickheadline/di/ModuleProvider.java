@@ -38,7 +38,6 @@ import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -95,7 +94,6 @@ public class ModuleProvider {
     ApiEndpoint provideWeatherService(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(ConstantFields.WEATHER_BASE_URL)
                 .client(okHttpClient)
                 .build()
@@ -108,7 +106,6 @@ public class ModuleProvider {
     ApiEndpoint provideArticleService(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(ConstantFields.NEWS_BASE_URL)
                 .client(okHttpClient)
                 .build()
@@ -121,7 +118,6 @@ public class ModuleProvider {
     ApiEndpoint provideMapService(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(ConstantFields.MAP_BASE_URL)
                 .client(okHttpClient)
                 .build()
@@ -134,7 +130,6 @@ public class ModuleProvider {
     ApiEndpoint provideGeoNameService(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(ConstantFields.GEO_NAME_BASE_URL)
                 .client(okHttpClient)
                 .build()

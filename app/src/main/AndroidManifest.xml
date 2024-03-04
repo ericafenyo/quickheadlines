@@ -1,110 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.ericafenyo.quickheadline">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
   <!-- These permissions are necessary in order to access network. -->
-  <uses-permission android:name="android.permission.INTERNET"/>
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-  <!-- This permission is necessary in order to access device location. -->
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
   <application
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
     android:name="com.ericafenyo.quickheadline.di.MyApp"
-    android:usesCleartextTraffic="true"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
-    android:theme="@style/AppTheme">
+    android:theme="@style/AppTheme"
+    android:usesCleartextTraffic="true">
 
     <!-- Google Place Api -->
-    <meta-data
-      android:name="com.google.android.geo.API_KEY"
-      android:value="${placeApiKey}"/>
-
-    <!-- SplashActivity -->
     <activity
       android:name="com.ericafenyo.quickheadline.SplashActivity"
       android:theme="@style/SplashTheme">
       <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
+        <action android:name="android.intent.action.MAIN" />
 
-        <category android:name="android.intent.category.LAUNCHER"/>
+        <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <!-- MainActivity -->
+
+    <!-- SplashActivity -->
     <activity
       android:label="@string/app_name"
-      android:name="com.ericafenyo.quickheadline.home.MainActivity"/>
+      android:name="com.ericafenyo.quickheadline.home.MainActivity" />
+    <!-- MainActivity -->
+    <activity android:name="com.ericafenyo.quickheadline.WelcomeActivity" />
     <!-- WelcomeActivity -->
-    <activity android:name="com.ericafenyo.quickheadline.WelcomeActivity"/>
-    <!-- SearchActivity -->
     <activity android:name="com.ericafenyo.quickheadline.home.SearchActivity">
 
       <!-- meta tag and intent filter go into results activity -->
     </activity>
+    <!-- SearchActivity -->
+    <activity android:name="com.ericafenyo.quickheadline.home.WebActivity" />
     <!-- WebActivity -->
-    <activity android:name="com.ericafenyo.quickheadline.home.WebActivity"/>
+    <activity android:name="com.ericafenyo.quickheadline.discover.CategoryActivity" />
 
     <!-- ArticleJobService -->
-    <service
-      android:exported="false"
-      android:name="com.ericafenyo.quickheadline.sync.ArticleJobService">
-      <intent-filter>
-        <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
-      </intent-filter>
-    </service>
+    <activity android:name="com.ericafenyo.quickheadline.SettingsActivity" />
     <!-- WeatherJobService -->
-    <service
-      android:exported="false"
-      android:name="com.ericafenyo.quickheadline.sync.WeatherJobService">
-      <intent-filter>
-        <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
-      </intent-filter>
-    </service>
+    <activity android:name="com.ericafenyo.quickheadline.LicenseActivity" />
     <!-- ArticleSyncIntentService -->
-    <service android:name="com.ericafenyo.quickheadline.sync.ArticleSyncIntentService"/>
+    <activity android:name="com.ericafenyo.quickheadline.home.WeatherDetailActivity" />
     <!-- WeatherSyncIntentService -->
-    <service android:name="com.ericafenyo.quickheadline.sync.WeatherSyncIntentService"/>
+    <activity android:name="com.ericafenyo.quickheadline.MapsActivity" />
 
     <!-- ArticleRemoteViewsService -->
-    <service
-      android:name="com.ericafenyo.quickheadline.widget.ArticleRemoteViewsService"
-      android:permission="android.permission.BIND_REMOTEVIEWS"/>
+    <meta-data
+      android:name="com.google.android.geo.API_KEY"
+      android:value="${placeApiKey}" />
     <!-- ClosingService -->
-    <service
-      android:name="com.ericafenyo.quickheadline.ClosingService"
-      android:stopWithTask="false"/>
-
-    <!-- ArticleProvider -->
     <provider
       android:authorities="@string/article_provider_content_authority"
       android:exported="false"
-      android:name="com.ericafenyo.quickheadline.provider.ArticleProvider"/>
-    <!-- WeatherProvider -->
+      android:name="com.ericafenyo.quickheadline.provider.ArticleProvider" />
+
+    <!-- ArticleProvider -->
     <provider
       android:authorities="@string/weather_provider_content_authority"
       android:exported="false"
-      android:name="com.ericafenyo.quickheadline.provider.WeatherProvider"/>
-
-    <!-- ArticleAppWidget -->
+      android:name="com.ericafenyo.quickheadline.provider.WeatherProvider" />
+    <!-- WeatherProvider -->
     <receiver android:name="com.ericafenyo.quickheadline.widget.ArticleAppWidget">
       <intent-filter>
-        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
       </intent-filter>
 
       <meta-data
         android:name="android.appwidget.provider"
-        android:resource="@xml/widget_info"/>
+        android:resource="@xml/widget_info" />
     </receiver>
 
-    <activity android:name="com.ericafenyo.quickheadline.discover.CategoryActivity"/>
-    <activity android:name="com.ericafenyo.quickheadline.SettingsActivity"/>
-    <activity android:name="com.ericafenyo.quickheadline.LicenseActivity"/>
-    <activity android:name="com.ericafenyo.quickheadline.home.WeatherDetailActivity"/>
-    <activity android:name="com.ericafenyo.quickheadline.MapsActivity"/>
+    <!-- ArticleAppWidget -->
+    <service
+      android:exported="false"
+      android:name="com.ericafenyo.quickheadline.sync.ArticleJobService">
+      <intent-filter>
+        <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+      </intent-filter>
+    </service>
+
+    <service
+      android:exported="false"
+      android:name="com.ericafenyo.quickheadline.sync.WeatherJobService">
+      <intent-filter>
+        <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+      </intent-filter>
+    </service>
+    <service android:name="com.ericafenyo.quickheadline.sync.ArticleSyncIntentService" />
+    <service android:name="com.ericafenyo.quickheadline.sync.WeatherSyncIntentService" />
+    <service
+      android:name="com.ericafenyo.quickheadline.widget.ArticleRemoteViewsService"
+      android:permission="android.permission.BIND_REMOTEVIEWS" />
+    <service
+      android:name="com.ericafenyo.quickheadline.ClosingService"
+      android:stopWithTask="false" />
 
   </application>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <!-- This permission is necessary in order to access device location. -->
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+  <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

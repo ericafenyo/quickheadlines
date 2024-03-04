@@ -33,8 +33,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.ericafenyo.quickheadline.R;
 import com.ericafenyo.quickheadline.SettingsActivity;
 import com.ericafenyo.quickheadline.model.ArticleCategory;
@@ -47,10 +45,7 @@ import java.util.List;
  * a simple fragment class to display article categories
  */
 public class DiscoverFragment extends Fragment {
-
-    @BindView(R.id.recycler_view_discover)
     RecyclerView recyclerView;
-    @BindView(R.id.toolbar_discover)
     Toolbar toolbar;
 
     public DiscoverFragment() {
@@ -74,7 +69,6 @@ public class DiscoverFragment extends Fragment {
         @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_discover, container, false);
-        ButterKnife.bind(this, view);
         List<ArticleCategory> mCategories = CategoryUtils.getArticleCategories(getActivity());
         DiscoverAdapter mAdapter = new DiscoverAdapter(getActivity());
         mAdapter.setData(mCategories);
